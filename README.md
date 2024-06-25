@@ -1,2 +1,2 @@
-# vaastav.tech.github.io
+# vaastav.tech
 Official website for Vaastav Technologies (OPC) Private Limited
