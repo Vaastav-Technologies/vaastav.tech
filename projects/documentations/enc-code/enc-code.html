@@ -1,54 +1,49 @@
 <!DOCTYPE html>
-<html>
-        <head>
-                <title>enc-code pre-release</title>
-        </head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>enc-code Pre-release</title>
+    <link rel="stylesheet" href="../../../css/style.css">
+</head>
+<body>
 
-        <body>
-        <p><strong>enc-code</strong></p>
-        <p>`enc` command is a wrapper around your regular version control system (`git`, `svn`, `mercurial` etc.).</p>
-        <p>Currently only supported for git.</p>
-        <div>
-        This command enables encryption and scrambling of repository files, commit messages, author info and
-        commit date-time. The code stays decrypted in your local but is pushed
-        in encrypted state in the remote repo.</div>
-        <div>An enc repo organises code into:</div>
-        <p>
-        <div>
-        1) `working tree stage`: the stage where your code stays pure, unencrypted and/or unscrambled. This is the
-        stage where user is supposed to make changes and perform usual git operations by using the 'enc' command instead
-        of the 'git' command. Users can set a trusted repository location to push this pure code into, this is not
-        required though.</div>
-        <div>
-        2) `process stage`: the stage where everything in the code is processed, encrypted and/or scrambled. This stage is
-        configured so that processed code can be pushed to the remote untrusted repository.</div></p>
+    <div class="container">
+        <h1>enc-code Pre-release</h1>
 
-        <div>
-                > Note: `enc` command needs bash emulator to run on windows, e.g. `git-bash`. This requirement is almost always
-        </div> 
-        <div>
-                > satisfied by `git` on windows.
+        <p><strong>enc-code</strong> is a wrapper around your regular version control system (<code>git</code>, <code>svn</code>, <code>mercurial</code>, etc.).</p>
+        <p>Currently, it only supports Git.</p>
+
+        <p>This command enables encryption and scrambling of repository files, commit messages, author info, and commit date-time. The code remains decrypted locally but is pushed in an encrypted state to the remote repository.</p>
+
+        <p>An <strong>enc</strong> repository organizes code into:</p>
+        <ul>
+            <li><strong>Working Tree Stage</strong>: The stage where your code remains pure, unencrypted, and unscrambled. This is where users make changes and perform usual Git operations using the <code>enc</code> command instead of <code>git</code>. Users can optionally push this pure code to a trusted repository.</li>
+            <li><strong>Process Stage</strong>: The stage where everything in the code is processed, encrypted, and/or scrambled. This stage is configured for pushing processed code to the remote, untrusted repository.</li>
+        </ul>
+
+        <div class="note">
+            <p><strong>Note:</strong> The <code>enc</code> command requires a bash emulator to run on Windows (e.g., <code>git-bash</code>). This is typically satisfied by having <code>git</code> installed on Windows.</p>
         </div>
 
-        <div>
-                > Note: The Majority of git commands are supported
+        <div class="note">
+            <p><strong>Note:</strong> The majority of Git commands are supported.</p>
         </div>
-        </p>
-        <p>
-                Get your own copy to test by mailing to <a href="mailto:info@vaastav.tech">info@vaastav.tech</a> and
-                kindly include details such as:
-                <ul>
-                        <li>Your full Name</li>
-                        <li>Organisation/school name</li>
-                        <li>Operating system</li>
-                        <li>ABI</li>
-                        <li>CPU arch</li>
-                </ul>
-                Kindly get back to us to give your critical feedback on the product.
-                <div>As an incentive, pre-adopters and pre-release testers will get a full year free access to product.</div>
 
-        </p>
-        <p>Product documentation <a href="html/index.html">here</a>.</p>
-    </body>
-    
+        <p>To test <strong>enc-code</strong>, you can request your own copy by emailing <a href="mailto:info@vaastav.tech">info@vaastav.tech</a> with the following details:</p>
+        <ul>
+            <li>Your full name</li>
+            <li>Organization or school name</li>
+            <li>Operating system</li>
+            <li>ABI</li>
+            <li>CPU architecture</li>
+        </ul>
+        <p>As a thank-you for critical feedback, pre-adopters and pre-release testers will receive a full year of free access to the product.</p>
+
+        <div class="footer">
+            <p>Find the product documentation <a href="html/index.html">here</a>.</p>
+        </div>
+    </div>
+
+</body>
 </html>

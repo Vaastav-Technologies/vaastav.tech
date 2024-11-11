@@ -1,0 +1,93 @@
+/* Reset and basic styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Container and title styling */
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 2rem;
+    color: #444;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Styling for paragraphs and lists */
+p {
+    margin-bottom: 10px;
+    color: #666;
+}
+
+ul {
+    margin: 10px 0;
+    padding-left: 20px;
+    color: #555;
+}
+
+ul ul {
+    margin-left: 20px;
+    padding-left: 15px;
+    list-style-type: circle;
+}
+
+/* Link styles */
+a {
+    color: #0288d1;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Project section */
+.projects {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #e3f2fd;
+    border-left: 5px solid #0288d1;
+    border-radius: 4px;
+}
+
+/* Tagline styling */
+.tagline {
+    text-align: center;
+    font-style: italic;
+    color: #555;
+    margin-top: 15px;
+    font-size: 1.1rem;
+}
+
+/* Highlighted or note sections */
+.note {
+    background: #e3f2fd;
+    color: #0277bd;
+    padding: 10px;
+    border-left: 5px solid #0288d1;
+    margin-bottom: 15px;
+}
+
+/* Footer links */
+.footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
