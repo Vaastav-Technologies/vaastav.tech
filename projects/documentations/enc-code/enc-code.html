@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+        <head>
+                <title>enc-code pre-release</title>
+        </head>
+
+        <body>
+        <p><strong>enc-code</strong></p>
+        <p>`enc` command is a wrapper around your regular version control system (`git`, `svn`, `mercurial` etc.).</p>
+        
+        <div>
+        This command enables encryption and scrambling of repository files, commit messages, author info and
+        commit date-time. The code stays decrypted in your local but is pushed
+        in encrypted state in the remote repo.</div>
+        <div>An enc repo organises code into:</div>
+        <p>
+        <div>
+        1) `working tree stage`: the stage where your code stays pure, unencrypted and/or unscrambled. This is the
+        stage where user is supposed to make changes and perform usual git operations by using the 'enc' command instead
+        of the 'git' command. Users can set a trusted repository location to push this pure code into, this is not
+        required though.</div>
+        <div>
+        2) `process stage`: the stage where everything in the code is processed, encrypted and/or scrambled. This stage is
+        configured so that processed code can be pushed to the remote untrusted repository.</div></p>
+
+        <div>
+                > Note: `enc` command needs bash emulator to run on windows, e.g. `git-bash`. This requirement is almost always
+        </div> 
+        <div>
+                > satisfied by `git` on windows.
+        </div>
+
+        <div>
+                > Note: The Majority of git commands are supported
+        </div>
+        </p>
+        <p>
+                Get your own copy to test by mailing to <a href="mailto:info@vaastav.tech">info@vaastav.tech</a> and
+                kindly include details such as:
+                <ul>
+                        <li>Your full Name</li>
+                        <li>Organisation/school name</li>
+                        <li>Operating system</li>
+                        <li>ABI</li>
+                        <li>CPU arch</li>
+                </ul>
+                Kindly get back to us to give your critical feedback on the product.
+                <div>As an incentive, pre-adopters and pre-release testers will get a full year free access to product.</div>
+        </p>
+    </body>
+    
+</html>
