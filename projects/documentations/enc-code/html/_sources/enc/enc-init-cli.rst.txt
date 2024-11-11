@@ -1,0 +1,166 @@
+########
+init
+########
+
+.. argparse::
+    :module: enc.init
+    :func: get_main_command_parser
+    :prog: enc init
+
+===============
+Examples
+===============
+
+.. testsetup:: *
+
+    import enc.init
+    from tests.test_enc.test_init import EncInitCLITest
+
+Normal run
+==========
+
+Always takes current directory as the working tree. This is done so that all the commands (atleast) in ``v0`` will
+always run only on the working-tree root. This is decided to reduce vcs complications at a later stage.
+
+.. |normal_run_command| replace:: enc init {non_existing_process_stage} -k {key_file}
+
+.. code-block:: shell
+
+    |normal_run_command|
+
+.. testsetup:: normal_run_command
+
+    command = "|normal_run_command|"
+
+.. testcode:: normal_run_command
+
+    EncInitCLITest(command).run()
+
+Does not accept existing process stage or encrypt directory
+===========================================================
+
+This is done because an existing process-stage may or may-not be empty which can result in potential complications in
+directory and vcs management in the future. A path to non-existing process-stage must be provided which will then be
+created and initialised.
+
+.. |existing_process_stage_command| replace:: enc init {process_stage} -k {non_existing_key_file}
+
+.. code-block:: shell
+
+    |existing_process_stage_command|
+
+.. testsetup:: existing_process_stage_command
+
+    from enc.helpers.error_codes import ENC_ERR_INVALID_USAGE
+    command = "|existing_process_stage_command|"
+
+.. testcode:: existing_process_stage_command
+
+    EncInitCLITest(command).exits_with_err_code(ENC_ERR_INVALID_USAGE)
+
+Does not accept non-existing key files
+======================================
+
+Absent key files obviously do not provide any keys which will disallow encryption/decryption of the vcs tree.
+
+.. |non_existing_key_file_command| replace:: enc init {non_existing_process_stage} -k {non_existing_key_file}
+
+.. code-block:: shell
+
+    |non_existing_key_file_command|
+
+.. testsetup:: non_existing_key_file_command
+
+    from enc.helpers.error_codes import ENC_ERR_INVALID_USAGE
+    command = "|non_existing_key_file_command|"
+
+.. testcode:: non_existing_key_file_command
+
+    EncInitCLITest(command).exits_with_err_code(ENC_ERR_INVALID_USAGE)
+
+Does not accept key files from ``stdin``
+========================================
+
+``-`` argument to -k/--key-file instructs program to read key-file from ``stdin`` and since key-file details are
+later required for encryption and hence ``-`` is disallowed as an input value for -k/--key-file.
+
+.. |dash_key_file_command| replace:: enc init {non_existing_process_stage} -k -
+
+.. code-block:: shell
+
+    |dash_key_file_command|
+
+.. testsetup:: dash_key_file_command
+
+    from enc.helpers.error_codes import ENC_ERR_INVALID_USAGE
+    command = "|dash_key_file_command|"
+
+.. testcode:: dash_key_file_command
+
+    EncInitCLITest(command).exits_with_err_code(ENC_ERR_INVALID_USAGE)
+
+Does not accept unregistered config-versions
+============================================
+
+Only registered config-version:
+
+1. ``v0`` (default)
+
+can be supplied.
+
+.. TODO: make parser agnostic of the --config-version option's position.
+..      here if --config-version option is given at the end of the command string then error is generated.
+..      most probable cause: we use type=argparse.FileType('r') while preparing the -k option in argparse.
+..      type=argparse.FileType('r') opens the file in read mode when it encounters the filepath as a value for
+..      the -k option so when --config-version is provided at the end of the command as such:
+..          enc-init {non_existing_process_stage} -k {key_file} --config-version unregistered
+..      then the parser sees -k option first and opens the key-file. The parser later fails when --config-version is
+..      given a value outside the allowed choices, this raises a SystemExit(2) (which is expected behavior).
+..      Now, when the CLITest tries to close all the temporary files and delete the root_dir then key-file is still
+..      open. This raises another error (PermissionError on windows) as the CLITest is trying to delete
+..      the root_dir (which has key-file inside of it) but it is being used by the parser already and has the
+..      key-file in open state.
+..      temporary-fix: Use the --config-version option before -k option so that the parser sees --config-version
+..      first and fails expectedly and does the cleanup as well.
+
+.. |config_version_specifier_command| replace:: enc init {non_existing_process_stage} --config-version unregistered -k {key_file}
+
+.. code-block:: shell
+
+    |config_version_specifier_command|
+
+.. testsetup:: config_version_specifier_command
+
+    from enc.helpers.error_codes import ENC_ERR_INVALID_USAGE
+    command = "|config_version_specifier_command|"
+
+.. testcode:: config_version_specifier_command
+
+    EncInitCLITest(command).exits_with_err_code(ENC_ERR_INVALID_USAGE)
+
+Force mode enables reinitialisation of enc directory
+====================================================
+
+Enable force initialisation of the working tree. If working tree already has a ``.git`` and ``.enc`` directory
+then that means it was previously enc-initialised and ``enc-init`` will not reinitialise the enc-repo.
+To enable force reinitialisation use the ``-f`` flag.
+
+.. |normal_run_command_force| replace:: enc init {gen_non_existing_process_stage} -k {key_file} -f
+
+.. code-block:: shell
+
+    |normal_run_command_force|
+
+.. testsetup:: normal_run_command_force
+
+    from tempfile import TemporaryDirectory
+    from enc.init import ENC_INIT_FORCE_SHRT_OPT, ENC_INIT_FORCE_LNG_OPT
+    command = "|normal_run_command_force|"
+
+.. testcode:: normal_run_command_force
+
+    with TemporaryDirectory() as root_dir:
+        EncInitCLITest(command.replace(f"-{ENC_INIT_FORCE_SHRT_OPT}", "").replace(f"--{ENC_INIT_FORCE_LNG_OPT}", "")).run_with_root(root_dir)   # remove force and initialise enc repo
+        EncInitCLITest(command).run_with_root(root_dir, exist_ok=True)  # reinitialise with force=True
+
+.. include:: enc-fixture-detail.rst

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>manip &#8212; enc-code 0.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=c058f7c8" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <script src="../_static/documentation_options.js?v=7026087e"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="generate-config" href="enc-generate-config-cli.html" />
+    <link rel="prev" title="init" href="enc-init-cli.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="manip">
+<h1>manip<a class="headerlink" href="#manip" title="Link to this heading">¶</a></h1>
+<p><p>Commands to manipulate files.
+These commands can (scramble and/or encrypt) and/or (descramble and/or decrypt) files or strings by strategies:</p>
+<ol class="arabic simple">
+<li><p>whole</p></li>
+<li><p>per-line</p></li>
+<li><p>per-word</p></li>
+<li><p>per-delimiter</p></li>
+</ol>
+</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">enc</span> <span class="n">manip</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">v</span> <span class="o">|</span> <span class="o">-</span><span class="n">q</span><span class="p">]</span> <span class="p">{</span><span class="n">randomize</span><span class="p">,</span><span class="n">offset</span><span class="p">,</span><span class="n">identity</span><span class="p">,</span><span class="n">strenc</span><span class="p">}</span>
+</pre></div>
+</div>
+<section id="enc.manip-get_main_command_parser-positional-arguments">
+<h2>Positional Arguments<a class="headerlink" href="#enc.manip-get_main_command_parser-positional-arguments" title="Link to this heading">¶</a></h2>
+<dl class="option-list">
+<dt><kbd>manipulator_subcommand</kbd></dt>
+<dd><p>Possible choices: randomize, offset, identity, strenc</p>
+<p>The file manipulator subcommand.</p>
+</dd>
+</dl>
+</section>
+<section id="enc.manip-get_main_command_parser-named-arguments">
+<h2>Named Arguments<a class="headerlink" href="#enc.manip-get_main_command_parser-named-arguments" title="Link to this heading">¶</a></h2>
+<dl class="option-list">
+<dt><kbd>-v, --verbose</kbd></dt>
+<dd><dl class="simple">
+<dt>Specify verbosity level as -v, -vv or -vvv.</dt><dd><p>By default the VCS (Git) or OS call command logs are always displayed. For more fine grain tuning on the verbosity
+of logs use:
+-v to show INFO logs additionally.
+-vv to show INFO and DEBUG logs additionally.
+-vvv to show INFO, DEBUG and TRACE logs, this level also enables exception tracebacks.</p>
+</dd>
+</dl>
+</dd>
+<dt><kbd>-q, --quiet</kbd></dt>
+<dd><dl class="simple">
+<dt>Quiet logs as -q, -qq or -qqq.</dt><dd><p>By default the VCS (Git) or OS call command logs are always displayed. For more fine grain tuning on quietness of
+logs use:
+-q to Disable VCS (git) or OS call command logs and WARNINGS; ERROR and FATAL will still show.
+-qq to Additionally disable ERRORS; FATAL logs will still show.
+-qqq to Disable full logging.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">enc-code</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Subcommands:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="enc-init-cli.html">init</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">manip</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#enc.manip-get_main_command_parser-positional-arguments">Positional Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enc.manip-get_main_command_parser-named-arguments">Named Arguments</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="enc-generate-config-cli.html">generate-config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enc-refresh-cli.html">refresh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enc-process-cli.html">process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enc-commit-cli.html">commit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enc-pull-cli.html">pull</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enc-push-cli.html">push</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enc-snapshot-cli.html">snapshot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enc-rev-snapshot-cli.html">rev-snapshot</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Configuration files:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../etc/v0/etc-config.html">V0 style config</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="enc-init-cli.html" title="previous chapter">init</a></li>
+      <li>Next: <a href="enc-generate-config-cli.html" title="next chapter">generate-config</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Suhas Krishna Srivastava.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.0.2</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../_sources/enc/enc-manip-cli.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

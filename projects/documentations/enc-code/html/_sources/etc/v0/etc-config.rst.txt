@@ -1,0 +1,192 @@
+###############
+V0 style config
+###############
+
+.. |V0_DOCS_DIR| replace:: docs/source/etc/v0
+
+.. testsetup:: *
+
+    import os
+    import pathlib
+    from tests.test_etc import EtcTest
+    from etc import EncConfigParser, ConfigVersion
+    from configparser import RawConfigParser
+
+    def full_path(path):
+        this_dir = pathlib.Path(os.getcwd(), '|V0_DOCS_DIR|')
+        return pathlib.Path(this_dir, path)
+
+Description
+***********
+
+V0-style config files support all the features of python's configparser parseable configs plus allows features such as::
+
+Features
+********
+
+1) ``ORed`` sections::
+
+These kind of sections can declare multiple elements in the same section for duplication of key-value pairs using the V0-style delimiter (``|``), for e.g.
+
+.. |ORed_section_motivation_config_file| replace:: ORed-section-motivation-cfg.ini
+
+.. literalinclude:: |ORed_section_motivation_config_file|
+    :language: ini
+
+Similar sections can be combined using ``|``, for e.g.
+
+.. |ORed_section_demonstration_config_file| replace:: ORed-section-demonstration-cfg.ini
+
+.. literalinclude:: |ORed_section_demonstration_config_file|
+    :language: ini
+
+.. testcode:: ORed_section_demo_testcase
+
+    with open(full_path('|ORed_section_motivation_config_file|')) as mf:
+        motive_dict = EtcTest(mf, EncConfigParser.for_version(ConfigVersion.v0)).run()
+
+    with open(full_path('|ORed_section_demonstration_config_file|')) as df:
+        demo_dict = EtcTest(df, EncConfigParser.for_version(ConfigVersion.v0)).run()
+    assert motive_dict == demo_dict
+
+2) ``*`` or the default section::
+
+These sections match any unmatched key, for e.g.
+
+.. |default_section_demonstration_config_file| replace:: default-section-demonstration-cfg.ini
+
+.. literalinclude:: |default_section_demonstration_config_file|
+    :language: ini
+
+.. testcode:: default_section_demonstration_config_testcase
+
+    with open(full_path('|default_section_demonstration_config_file|')) as mf:
+        etc_test = EtcTest(mf, EncConfigParser.for_version(ConfigVersion.v0))
+        etc_test.run()                                        # initialise the parser
+        _ = etc_test.config_parser.get_section('section1')    # section1 is present and hence no error is thrown
+        _ = etc_test.config_parser.get_section('section2')    # section2 is present and hence no error is thrown
+        st_section = etc_test.config_parser.get_section('*')  # * or the default section is present and hence no error is thrown
+        assert st_section == etc_test.config_parser.get_section('untitled')   # There is no untitled section so this section is defaulted to the * section
+
+
+Restrictions
+************
+
+1) Section names cannot start with delimiter (``|``)
+
+.. |ORed_section_starting_with_delimiter| replace:: ORed-section-starting-with-delimiter.ini
+
+.. literalinclude:: |ORed_section_starting_with_delimiter|
+    :language: ini
+
+.. testsetup:: ORed_section_starting_with_delimiter
+
+    from etc import EncConfigError
+
+.. testcode:: ORed_section_starting_with_delimiter
+
+    with open(full_path('|ORed_section_starting_with_delimiter|')) as mf:
+        EtcTest(mf, EncConfigParser.for_version(ConfigVersion.v0)).raises(EncConfigError)
+
+
+2) Section names cannot end with delimiter (``|``)
+
+.. |ORed_section_ending_with_delimiter| replace:: ORed-section-ending-with-delimiter.ini
+
+.. literalinclude:: |ORed_section_ending_with_delimiter|
+    :language: ini
+
+.. testsetup:: ORed_section_ending_with_delimiter
+
+    from etc import EncConfigError
+
+.. testcode:: ORed_section_ending_with_delimiter
+
+    with open(full_path('|ORed_section_ending_with_delimiter|')) as mf:
+        EtcTest(mf, EncConfigParser.for_version(ConfigVersion.v0)).raises(EncConfigError)
+
+
+3) Duplication across/outside sections is not allowed
+
+.. |duplication_outside_section| replace:: duplication-outside-section-cfg.ini
+
+.. literalinclude:: |duplication_outside_section|
+    :language: ini
+
+.. testsetup:: duplication_outside_section
+
+    from etc import EncConfigError
+
+.. testcode:: duplication_outside_section
+
+    with open(full_path('|duplication_outside_section|')) as mf:
+        EtcTest(mf, EncConfigParser.for_version(ConfigVersion.v0)).raises(EncConfigError)
+
+
+4) Duplication within sections is not allowed
+
+.. |duplication_within_section| replace:: duplication-within-section-cfg.ini
+
+.. literalinclude:: |duplication_within_section|
+    :language: ini
+
+.. testsetup:: duplication_within_section
+
+    from etc import EncConfigError
+
+.. testcode:: duplication_within_section
+
+    with open(full_path('|duplication_within_section|')) as mf:
+        EtcTest(mf, EncConfigParser.for_version(ConfigVersion.v0)).raises(EncConfigError)
+
+
+5) Sections starting with space/spaces are not allowed
+
+.. |section_starting_with_space| replace:: section-starting-with-space-cfg.ini
+
+.. literalinclude:: |section_starting_with_space|
+    :language: ini
+
+.. testsetup:: section_starting_with_space
+
+    from etc import EncConfigError
+
+.. testcode:: section_starting_with_space
+
+    with open(full_path('|section_starting_with_space|')) as mf:
+        EtcTest(mf, EncConfigParser.for_version(ConfigVersion.v0)).raises(EncConfigError)
+
+
+6) Sections ending with space/spaces are not allowed
+
+.. |section_ending_with_space| replace:: section-ending-with-space-cfg.ini
+
+.. literalinclude:: |section_ending_with_space|
+    :language: ini
+
+.. testsetup:: section_ending_with_space
+
+    from etc import EncConfigError
+
+.. testcode:: section_ending_with_space
+
+    with open(full_path('|section_ending_with_space|')) as mf:
+        EtcTest(mf, EncConfigParser.for_version(ConfigVersion.v0)).raises(EncConfigError)
+
+
+7) Sections starting and ending with space/spaces are not allowed
+
+.. |section_starting_ending_with_space| replace:: section-starting-ending-with-space-cfg.ini
+
+.. literalinclude:: |section_starting_ending_with_space|
+    :language: ini
+
+.. testsetup:: section_starting_ending_with_space
+
+    from etc import EncConfigError
+
+.. testcode:: section_starting_ending_with_space
+
+    with open(full_path('|section_starting_ending_with_space|')) as mf:
+        EtcTest(mf, EncConfigParser.for_version(ConfigVersion.v0)).raises(EncConfigError)
+

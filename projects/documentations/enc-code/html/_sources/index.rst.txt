@@ -1,0 +1,39 @@
+.. enc-code documentation master file, created by
+   sphinx-quickstart on Sun Aug  4 00:05:36 2024.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+enc-code documentation
+======================
+Base command ``enc``
+
+.. include:: ../../README.md
+    :start-after: <!-- DESCRIPTION BEGIN -->
+    :end-before: <!-- DESCRIPTION END -->
+
+.. include:: ../../README.md
+    :start-after: <!-- EXAMPLES BEGIN -->
+    :end-before: <!-- EXAMPLES END -->
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Subcommands:
+
+   enc/enc-init-cli
+   enc/enc-manip-cli
+   enc/enc-generate-config-cli
+   enc/enc-refresh-cli
+   enc/enc-process-cli
+   enc/enc-commit-cli
+   enc/enc-pull-cli
+   enc/enc-push-cli
+   enc/enc-snapshot-cli
+   enc/enc-rev-snapshot-cli
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Configuration files:
+
+   etc/v0/etc-config

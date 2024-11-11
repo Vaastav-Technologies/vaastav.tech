@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>generate-config &#8212; enc-code 0.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=c058f7c8" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <script src="../_static/documentation_options.js?v=7026087e"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="refresh" href="enc-refresh-cli.html" />
+    <link rel="prev" title="manip" href="enc-manip-cli.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="generate-config">
+<h1>generate-config<a class="headerlink" href="#generate-config" title="Link to this heading">¶</a></h1>
+<p><p>This is an <code class="docutils literal notranslate"><span class="pre">enc</span></code> plumbing command.</p>
+<p>Generate config files as per the supplied versions and keys.</p>
+<p>This program populates the config file for easier parsing by other <code class="docutils literal notranslate"><span class="pre">enc</span></code> commands.</p>
+</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">enc</span> <span class="n">generate</span><span class="o">-</span><span class="n">config</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">v</span> <span class="o">|</span> <span class="o">-</span><span class="n">q</span><span class="p">]</span> <span class="o">-</span><span class="n">i</span> <span class="n">INPUT_FILE</span> <span class="p">[</span><span class="o">-</span><span class="n">o</span> <span class="n">OUTPUT_STREAM</span><span class="p">]</span> <span class="o">-</span><span class="n">k</span> <span class="n">KEY_FILE</span> <span class="p">[{</span><span class="n">v0</span><span class="p">}]</span>
+</pre></div>
+</div>
+<section id="enc.generate_config-get_main_command_parser-positional-arguments">
+<h2>Positional Arguments<a class="headerlink" href="#enc.generate_config-get_main_command_parser-positional-arguments" title="Link to this heading">¶</a></h2>
+<dl class="option-list">
+<dt><kbd>config_version</kbd></dt>
+<dd><p>Possible choices: v0</p>
+<p>Optional parameter: Config version to generate the config for. <code class="docutils literal notranslate"><span class="pre">config_version</span></code> is usually picked-up from the <code class="docutils literal notranslate"><span class="pre">input_file</span></code> but can be supplied if another config version generation strategy is required.</p>
+</dd>
+</dl>
+</section>
+<section id="enc.generate_config-get_main_command_parser-named-arguments">
+<h2>Named Arguments<a class="headerlink" href="#enc.generate_config-get_main_command_parser-named-arguments" title="Link to this heading">¶</a></h2>
+<dl class="option-list">
+<dt><kbd>-v, --verbose</kbd></dt>
+<dd><dl class="simple">
+<dt>Specify verbosity level as -v, -vv or -vvv.</dt><dd><p>By default the VCS (Git) or OS call command logs are always displayed. For more fine grain tuning on the verbosity
+of logs use:
+-v to show INFO logs additionally.
+-vv to show INFO and DEBUG logs additionally.
+-vvv to show INFO, DEBUG and TRACE logs, this level also enables exception tracebacks.</p>
+</dd>
+</dl>
+</dd>
+<dt><kbd>-q, --quiet</kbd></dt>
+<dd><dl class="simple">
+<dt>Quiet logs as -q, -qq or -qqq.</dt><dd><p>By default the VCS (Git) or OS call command logs are always displayed. For more fine grain tuning on quietness of
+logs use:
+-q to Disable VCS (git) or OS call command logs and WARNINGS; ERROR and FATAL will still show.
+-qq to Additionally disable ERRORS; FATAL logs will still show.
+-qqq to Disable full logging.</p>
+</dd>
+</dl>
+</dd>
+<dt><kbd>-i</kbd></dt>
+<dd><p>File to take as an input as generator config. Only readable files will be accepted. Since ‘-’ as a filename opens &lt;stdin&gt; and because we want to store the gen config for later use hence ‘-’ as a filename is not accepted. Likewise, Directories are also not accepted.</p>
+</dd>
+<dt><kbd>-o</kbd></dt>
+<dd><p>File to write output into. Output is written to stdout if the value for this option is ‘-’ or not provided.</p>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">-</span></code></p>
+</dd>
+<dt><kbd>-k, --key-file</kbd></dt>
+<dd><p>Path to the key file. This file is used as a key/passphrase file to encrypt and decrypt the files/filenames for further usage. Only readable files will be accepted. Since ‘-’ as a filename opens &lt;stdin&gt; and because we want to store the key-file for later use hence ‘-’ as a filename is not accepted. Likewise, Directories are also not accepted.</p>
+</dd>
+</dl>
+</section>
+<section id="command-examples">
+<h2>Command Examples<a class="headerlink" href="#command-examples" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">gc</span></code> is an alias of <code class="docutils literal notranslate"><span class="pre">generate-config</span></code>.</p>
+<section id="normal-run">
+<h3>1) Normal run<a class="headerlink" href="#normal-run" title="Link to this heading">¶</a></h3>
+<p>Generate the config using key file, input config and output config path</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>enc<span class="w"> </span>gc<span class="w"> </span>-k<span class="w"> </span><span class="o">{</span>key_file<span class="o">}</span><span class="w"> </span>-i<span class="w"> </span><span class="o">{</span>config_gen_file<span class="o">}</span><span class="w"> </span>-o<span class="w"> </span><span class="o">{</span>dummy_file<span class="o">}</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">EncGCCLITest</span><span class="p">(</span><span class="n">command</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="can-output-to-stdout-if-o-option-is-absent">
+<h3>2) Can Output to <code class="docutils literal notranslate"><span class="pre">stdout</span></code> if <code class="docutils literal notranslate"><span class="pre">-o</span></code> option is absent<a class="headerlink" href="#can-output-to-stdout-if-o-option-is-absent" title="Link to this heading">¶</a></h3>
+<p>Outputs to <code class="docutils literal notranslate"><span class="pre">stdout</span></code> if <code class="docutils literal notranslate"><span class="pre">-o</span></code> option is absent.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>enc<span class="w"> </span>gc<span class="w"> </span>-k<span class="w"> </span><span class="o">{</span>key_file<span class="o">}</span><span class="w"> </span>-i<span class="w"> </span><span class="o">{</span>config_gen_file<span class="o">}</span><span class="w"> </span>&gt;<span class="w"> </span><span class="o">{</span>dummy_file<span class="o">}</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">StrictCLITest</span><span class="p">(</span><span class="n">command</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="can-output-to-stdout-if-o-option-is">
+<h3>3) Can Output to <code class="docutils literal notranslate"><span class="pre">stdout</span></code> if <code class="docutils literal notranslate"><span class="pre">-o</span></code> option is <code class="docutils literal notranslate"><span class="pre">-</span></code><a class="headerlink" href="#can-output-to-stdout-if-o-option-is" title="Link to this heading">¶</a></h3>
+<p>Outputs to <code class="docutils literal notranslate"><span class="pre">stdout</span></code> if <code class="docutils literal notranslate"><span class="pre">-o</span></code> option is <code class="docutils literal notranslate"><span class="pre">-</span></code>.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>enc<span class="w"> </span>gc<span class="w"> </span>-k<span class="w"> </span><span class="o">{</span>key_file<span class="o">}</span><span class="w"> </span>-i<span class="w"> </span><span class="o">{</span>config_gen_file<span class="o">}</span><span class="w"> </span>-o<span class="w"> </span>-<span class="w"> </span>&gt;<span class="w"> </span><span class="o">{</span>dummy_file<span class="o">}</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">StrictCLITest</span><span class="p">(</span><span class="n">command</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="input-file-is-mandatory-in-cli-argument">
+<h3>4) Input File is mandatory in CLI argument<a class="headerlink" href="#input-file-is-mandatory-in-cli-argument" title="Link to this heading">¶</a></h3>
+<p>Input files must be always be provided.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>enc<span class="w"> </span>gc<span class="w"> </span>-k<span class="w"> </span><span class="o">{</span>key_file<span class="o">}</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">EncGCCLITest</span><span class="p">(</span><span class="n">command</span><span class="p">)</span><span class="o">.</span><span class="n">exits_with_err_code</span><span class="p">(</span><span class="n">ENC_ERR_INVALID_USAGE</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="does-not-accept-input-files-from-stdin">
+<h3>5) Does not accept input files from <code class="docutils literal notranslate"><span class="pre">stdin</span></code><a class="headerlink" href="#does-not-accept-input-files-from-stdin" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">-</span></code> argument to -i instructs program to read input-file from <code class="docutils literal notranslate"><span class="pre">stdin</span></code> and since input-file details are
+later required for encryption and hence <code class="docutils literal notranslate"><span class="pre">-</span></code> is disallowed as an input value for -i.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>enc<span class="w"> </span>gc<span class="w"> </span>-i<span class="w"> </span>-
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">EncGCCLITest</span><span class="p">(</span><span class="n">command</span><span class="p">)</span><span class="o">.</span><span class="n">exits_with_err_code</span><span class="p">(</span><span class="n">ENC_ERR_INVALID_USAGE</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="key-file-is-mandatory-in-cli-argument">
+<h3>6) Key File is mandatory in CLI argument<a class="headerlink" href="#key-file-is-mandatory-in-cli-argument" title="Link to this heading">¶</a></h3>
+<p>The config file may contain encryption and decryption keys which can use the key-file. This makes the key-file
+required in the CLI argument list.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>enc<span class="w"> </span>gc<span class="w"> </span>-i<span class="w"> </span><span class="o">{</span>config_gen_file<span class="o">}</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">EncGCCLITest</span><span class="p">(</span><span class="n">command</span><span class="p">)</span><span class="o">.</span><span class="n">exits_with_err_code</span><span class="p">(</span><span class="n">ENC_ERR_INVALID_USAGE</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="does-not-accept-key-files-from-stdin">
+<h3>7) Does not accept key files from <code class="docutils literal notranslate"><span class="pre">stdin</span></code><a class="headerlink" href="#does-not-accept-key-files-from-stdin" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">-</span></code> argument to -k/–key-file instructs program to read key-file from <code class="docutils literal notranslate"><span class="pre">stdin</span></code> and since key-file details are
+later required for encryption and hence <code class="docutils literal notranslate"><span class="pre">-</span></code> is disallowed as an input value for -k/–key-file.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>enc<span class="w"> </span>gc<span class="w"> </span>-k<span class="w"> </span>-
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">EncGCCLITest</span><span class="p">(</span><span class="n">command</span><span class="p">)</span><span class="o">.</span><span class="n">exits_with_err_code</span><span class="p">(</span><span class="n">ENC_ERR_INVALID_USAGE</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="does-not-accept-non-existing-key-files">
+<h3>8) Does not accept non-existing key files<a class="headerlink" href="#does-not-accept-non-existing-key-files" title="Link to this heading">¶</a></h3>
+<p>Absent key files obviously do not provide any keys which will disallow encryption/decryption of the vcs tree.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>enc<span class="w"> </span>gc<span class="w"> </span>-k<span class="w"> </span><span class="o">{</span>non_existing_key_file<span class="o">}</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">EncGCCLITest</span><span class="p">(</span><span class="n">command</span><span class="p">)</span><span class="o">.</span><span class="n">exits_with_err_code</span><span class="p">(</span><span class="n">ENC_ERR_INVALID_USAGE</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="can-take-inputs-from-config-gen-files-and-write-to-config-files">
+<h3>9) Can take inputs from config gen files and write to config files<a class="headerlink" href="#can-take-inputs-from-config-gen-files-and-write-to-config-files" title="Link to this heading">¶</a></h3>
+<p>Config gen files can be provided as inputs from CLI using the <code class="docutils literal notranslate"><span class="pre">-i</span></code> option. Similarly output can be written to a file passed to the <code class="docutils literal notranslate"><span class="pre">-o</span></code> option.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>enc<span class="w"> </span>gc<span class="w"> </span>-k<span class="w"> </span><span class="o">{</span>key_file<span class="o">}</span><span class="w"> </span>-i<span class="w"> </span><span class="o">{</span>config_gen_file<span class="o">}</span><span class="w"> </span>-o<span class="w"> </span><span class="o">{</span>dummy_file<span class="o">}</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">EncGCCLITest</span><span class="p">(</span><span class="n">command</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="can-write-generated-config-file-as-output-to-to-stdout-using-io-redirection">
+<h3>10) Can write generated config file as output to to stdout using IO redirection<a class="headerlink" href="#can-write-generated-config-file-as-output-to-to-stdout-using-io-redirection" title="Link to this heading">¶</a></h3>
+<p>Config gen files can be written as outputs to <code class="docutils literal notranslate"><span class="pre">stdout</span></code> using IO redirection when <code class="docutils literal notranslate"><span class="pre">-o</span></code> option is absent.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>enc<span class="w"> </span>generate-config<span class="w"> </span>-k<span class="w"> </span><span class="o">{</span>key_file<span class="o">}</span><span class="w"> </span>-i<span class="w"> </span><span class="o">{</span>config_gen_file<span class="o">}</span><span class="w"> </span>&gt;<span class="w"> </span><span class="o">{</span>dummy_file<span class="o">}</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">StrictCLITest</span><span class="p">(</span><span class="n">command</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="does-not-accept-unregistered-config-versions">
+<h3>11)  Does not accept unregistered config-versions<a class="headerlink" href="#does-not-accept-unregistered-config-versions" title="Link to this heading">¶</a></h3>
+<p>Only registered config-version:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">v0</span></code> (default)</p></li>
+</ol>
+<p>can be supplied.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>enc<span class="w"> </span>gc<span class="w"> </span>--config-version<span class="w"> </span>unregistered<span class="w"> </span>-k<span class="w"> </span><span class="o">{</span>key_file<span class="o">}</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">EncGCCLITest</span><span class="p">(</span><span class="n">command</span><span class="p">)</span><span class="o">.</span><span class="n">exits_with_err_code</span><span class="p">(</span><span class="n">ENC_ERR_INVALID_USAGE</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="examples-for-gen-config">
+<h2>Examples for gen config<a class="headerlink" href="#examples-for-gen-config" title="Link to this heading">¶</a></h2>
+<section id="correct-run-with-full-featured-sample-gen-config">
+<h3>1) Correct run with full-featured sample gen-config<a class="headerlink" href="#correct-run-with-full-featured-sample-gen-config" title="Link to this heading">¶</a></h3>
+Full-featured sample gen-config: <a href="../_static/sample-correct-gen-config.ini">sample-correct-gen-config</a><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>enc<span class="w"> </span>gc<span class="w"> </span>-k<span class="w"> </span><span class="o">{</span>key_file<span class="o">}</span><span class="w"> </span>-i<span class="w"> </span><span class="se">\&quot;</span>%<span class="o">(</span>cfg_gen_file<span class="o">)</span>s<span class="se">\&quot;</span><span class="w"> </span>-o<span class="w"> </span><span class="o">{</span>dummy_file<span class="o">}</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cfg_gen_file</span> <span class="o">=</span> <span class="n">full_path</span><span class="p">(</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;generate-config-static&#39;</span><span class="p">,</span> <span class="s1">&#39;sample-correct-gen-config.ini&#39;</span><span class="p">))</span>
+<span class="n">EncGCCLITest</span><span class="p">(</span><span class="n">command</span> <span class="o">%</span> <span class="nb">dict</span><span class="p">(</span><span class="n">cfg_gen_file</span><span class="o">=</span><span class="n">cfg_gen_file</span><span class="p">))</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="enc-file-missing-from-file-name-section">
+<h3>2) <code class="docutils literal notranslate"><span class="pre">enc-file</span></code> missing from file-name section<a class="headerlink" href="#enc-file-missing-from-file-name-section" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">enc-file</span></code> is the key which facilitates <strong>file</strong> encryption and/or scrambling and hence must be present in a file section.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># FAULTY config</span>
+<span class="c1"># ; VERSION = v0</span>
+<span class="c1">#</span>
+<span class="c1"># Required ``enc-file`` key missing</span>
+
+<span class="c1"># Multiple files can be specified by separating filenames by a | to indicate ORed pattern.</span>
+<span class="k">[.enc/.config|.enc/local.config]</span>
+<span class="c1"># enc-file missing</span>
+<span class="na">dec-file</span><span class="o">=</span><span class="s">cat &quot;%F&quot;</span>
+<span class="na">enc-file-name</span><span class="o">=</span><span class="s">echo &quot;%F&quot;</span>
+<span class="na">dec-file-name</span><span class="o">=</span><span class="s">echo &quot;%F&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>enc<span class="w"> </span>gc<span class="w"> </span>-k<span class="w"> </span><span class="o">{</span>key_file<span class="o">}</span><span class="w"> </span>-i<span class="w"> </span><span class="se">\&quot;</span>%<span class="o">(</span>cfg_gen_file<span class="o">)</span>s<span class="se">\&quot;</span><span class="w"> </span>-o<span class="w"> </span><span class="o">{</span>dummy_file<span class="o">}</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cfg_gen_file</span> <span class="o">=</span> <span class="n">full_path</span><span class="p">(</span><span class="s1">&#39;generate-config-static/enc-file-key-missing-gen-config.ini&#39;</span><span class="p">)</span>
+<span class="n">EncGCCLITest</span><span class="p">(</span><span class="n">command</span> <span class="o">%</span> <span class="nb">dict</span><span class="p">(</span><span class="n">cfg_gen_file</span><span class="o">=</span><span class="n">cfg_gen_file</span><span class="p">))</span><span class="o">.</span><span class="n">exits_with_err_code</span><span class="p">(</span><span class="n">ENC_ERR_DATA_FORMAT_ERR</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="dec-file-missing-from-file-name-section">
+<h3>3) <code class="docutils literal notranslate"><span class="pre">dec-file</span></code> missing from file-name section<a class="headerlink" href="#dec-file-missing-from-file-name-section" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">dec-file</span></code> is the key which facilitates <strong>file</strong> decryption and/or descrambling and hence must be present in a file section.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># FAULTY config</span>
+<span class="c1"># ; VERSION = v0</span>
+<span class="c1">#</span>
+<span class="c1"># Required ``dec-file`` key missing</span>
+
+<span class="c1"># Multiple files can be specified by separating filenames by a | to indicate ORed pattern.</span>
+<span class="k">[.enc/.config|.enc/local.config]</span>
+<span class="na">enc-file</span><span class="o">=</span><span class="s">cat &quot;%F&quot;</span>
+<span class="c1"># dec-file=cat &quot;%F&quot;</span>
+<span class="na">enc-file-name</span><span class="o">=</span><span class="s">echo &quot;%F&quot;</span>
+<span class="na">dec-file-name</span><span class="o">=</span><span class="s">echo &quot;%F&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>enc<span class="w"> </span>gc<span class="w"> </span>-k<span class="w"> </span><span class="o">{</span>key_file<span class="o">}</span><span class="w"> </span>-i<span class="w"> </span><span class="se">\&quot;</span>%<span class="o">(</span>cfg_gen_file<span class="o">)</span>s<span class="se">\&quot;</span><span class="w"> </span>-o<span class="w"> </span><span class="o">{</span>dummy_file<span class="o">}</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cfg_gen_file</span> <span class="o">=</span> <span class="n">full_path</span><span class="p">(</span><span class="s1">&#39;generate-config-static/dec-file-key-missing-gen-config.ini&#39;</span><span class="p">)</span>
+<span class="n">EncGCCLITest</span><span class="p">(</span><span class="n">command</span> <span class="o">%</span> <span class="nb">dict</span><span class="p">(</span><span class="n">cfg_gen_file</span><span class="o">=</span><span class="n">cfg_gen_file</span><span class="p">))</span><span class="o">.</span><span class="n">exits_with_err_code</span><span class="p">(</span><span class="n">ENC_ERR_DATA_FORMAT_ERR</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="dec-file-name-missing-from-file-name-section">
+<h3>4) <code class="docutils literal notranslate"><span class="pre">dec-file-name</span></code> missing from file-name section<a class="headerlink" href="#dec-file-name-missing-from-file-name-section" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">dec-file-name</span></code> is the key which facilitates <strong>filename</strong> decryption and/or descrambling and hence must be present in a file section.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># FAULTY config</span>
+<span class="c1"># ; VERSION = v0</span>
+<span class="c1">#</span>
+<span class="c1"># Required ``dec-file-name`` key missing</span>
+
+<span class="k">[.enc/config]</span>
+<span class="na">enc-file</span><span class="o">=</span><span class="s">(enc manip randomize 10 io --per-line &lt; &quot;%F&quot; | enc manip randomize 10 io | enc manip offset 2 io --per-line | gpg -ac --passphrase-file &quot;%K&quot; --batch | enc manip randomize 10 io | enc manip randomize 10 io --per-line) &amp;&amp; cp ${ENC_DIR_NAME}/${REPO_GEN_CONFIG_FILE_NAME} ${ENCRYPT_DIR}/${ENC_DIR_NAME}/${REPO_GEN_CONFIG_FILE_NAME}</span>
+<span class="na">dec-file</span><span class="o">=</span><span class="s">enc manip randomize 10 io --per-line -i &lt; &quot;%F&quot; | enc manip randomize 10 io -i | gpg -ad --passphrase-file &quot;%K&quot; --batch | enc manip offset 2 io -i --per-line | enc manip randomize 10 io -i | enc manip randomize 10 io -i --per-line</span>
+<span class="na">enc-file-name</span><span class="o">=</span><span class="s">echo &quot;%F&quot; | sed &quot;s,/,/sx-xyx/le/,g&quot; | enc manip randomize 18 io --per-line | awk -v prefix=&#39;.&#39; &#39;{print prefix$0}&#39;</span>
+<span class="c1"># dec-file-name key missing</span>
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>enc<span class="w"> </span>gc<span class="w"> </span>-k<span class="w"> </span><span class="o">{</span>key_file<span class="o">}</span><span class="w"> </span>-i<span class="w"> </span><span class="se">\&quot;</span>%<span class="o">(</span>cfg_gen_file<span class="o">)</span>s<span class="se">\&quot;</span><span class="w"> </span>-o<span class="w"> </span><span class="o">{</span>dummy_file<span class="o">}</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cfg_gen_file</span> <span class="o">=</span> <span class="n">full_path</span><span class="p">(</span><span class="s1">&#39;generate-config-static/dec-filename-key-missing-gen-config.ini&#39;</span><span class="p">)</span>
+<span class="n">EncGCCLITest</span><span class="p">(</span><span class="n">command</span> <span class="o">%</span> <span class="nb">dict</span><span class="p">(</span><span class="n">cfg_gen_file</span><span class="o">=</span><span class="n">cfg_gen_file</span><span class="p">))</span><span class="o">.</span><span class="n">exits_with_err_code</span><span class="p">(</span><span class="n">ENC_ERR_DATA_FORMAT_ERR</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="enc-file-name-missing-from-file-name-section">
+<h3>5) <code class="docutils literal notranslate"><span class="pre">enc-file-name</span></code> missing from file-name section<a class="headerlink" href="#enc-file-name-missing-from-file-name-section" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">enc-file-name</span></code> is the key which facilitates <strong>filename</strong> encryption and/or scrambling and hence must be present in a file section.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># FAULTY config</span>
+<span class="c1"># ; VERSION = v0</span>
+<span class="c1">#</span>
+<span class="c1"># Required ``enc-file-name`` key missing</span>
+
+<span class="k">[.enc/config]</span>
+<span class="na">enc-file</span><span class="o">=</span><span class="s">(enc manip randomize 10 io --per-line &lt; &quot;%F&quot; | enc manip randomize 10 io | enc manip offset 2 io --per-line | gpg -ac --passphrase-file &quot;%K&quot; --batch | enc manip randomize 10 io | enc manip randomize 10 io --per-line) &amp;&amp; cp ${ENC_DIR_NAME}/${REPO_GEN_CONFIG_FILE_NAME} ${ENCRYPT_DIR}/${ENC_DIR_NAME}/${REPO_GEN_CONFIG_FILE_NAME}</span>
+<span class="na">dec-file</span><span class="o">=</span><span class="s">enc manip randomize 10 io --per-line -i &lt; &quot;%F&quot; | enc manip randomize 10 io -i | gpg -ad --passphrase-file &quot;%K&quot; --batch | enc manip offset 2 io -i --per-line | enc manip randomize 10 io -i | enc manip randomize 10 io -i --per-line</span>
+<span class="c1"># enc-file-name key missing</span>
+<span class="na">dec-file-name</span><span class="o">=</span><span class="s">echo &quot;%F&quot; | cut -d &#39;.&#39; -f2- | enc manip randomize 18 io --per-line -i | sed &quot;s,/sx-xyx/le/,/,g&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>enc<span class="w"> </span>gc<span class="w"> </span>-k<span class="w"> </span><span class="o">{</span>key_file<span class="o">}</span><span class="w"> </span>-i<span class="w"> </span><span class="se">\&quot;</span>%<span class="o">(</span>cfg_gen_file<span class="o">)</span>s<span class="se">\&quot;</span><span class="w"> </span>-o<span class="w"> </span><span class="o">{</span>dummy_file<span class="o">}</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cfg_gen_file</span> <span class="o">=</span> <span class="n">full_path</span><span class="p">(</span><span class="s1">&#39;generate-config-static/enc-filename-key-missing-gen-config.ini&#39;</span><span class="p">)</span>
+<span class="n">EncGCCLITest</span><span class="p">(</span><span class="n">command</span> <span class="o">%</span> <span class="nb">dict</span><span class="p">(</span><span class="n">cfg_gen_file</span><span class="o">=</span><span class="n">cfg_gen_file</span><span class="p">))</span><span class="o">.</span><span class="n">exits_with_err_code</span><span class="p">(</span><span class="n">ENC_ERR_DATA_FORMAT_ERR</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="cipher-strategy-missing-from-commit-section">
+<h3>6) <code class="docutils literal notranslate"><span class="pre">cipher-strategy</span></code> missing from commit section<a class="headerlink" href="#cipher-strategy-missing-from-commit-section" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">cipher-strategy</span></code> is the key which facilitates <strong>commit</strong> related encryption and/or scrambling and hence must be present in a commit-related section.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># FAULTY config</span>
+<span class="c1"># ; VERSION = v0</span>
+<span class="c1">#</span>
+<span class="c1"># Required ``cipher-strategy`` key missing</span>
+
+<span class="c1"># Encrypt/Decrypt and/or Scramble/Descramble commit messages</span>
+<span class="c1"># Strategies can read inputs from stdin and write to stdout</span>
+<span class="k">[&lt;commit-message&gt;|&lt;commit-author-name&gt;]</span>
+<span class="c1"># cipher-strategy=enc randomize 10 io --per-line | enc randomize 10 io | enc offset 2 io --per-line</span>
+<span class="na">decipher-strategy</span><span class="o">=</span><span class="s">enc offset 2 io --per-line -i | enc randomize 10 io -i | enc randomize 10 io --per-line -i</span>
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>enc<span class="w"> </span>gc<span class="w"> </span>-k<span class="w"> </span><span class="o">{</span>key_file<span class="o">}</span><span class="w"> </span>-i<span class="w"> </span><span class="se">\&quot;</span>%<span class="o">(</span>cfg_gen_file<span class="o">)</span>s<span class="se">\&quot;</span><span class="w"> </span>-o<span class="w"> </span><span class="o">{</span>dummy_file<span class="o">}</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cfg_gen_file</span> <span class="o">=</span> <span class="n">full_path</span><span class="p">(</span><span class="s1">&#39;generate-config-static/cipher-key-missing-gen-config.ini&#39;</span><span class="p">)</span>
+<span class="n">EncGCCLITest</span><span class="p">(</span><span class="n">command</span> <span class="o">%</span> <span class="nb">dict</span><span class="p">(</span><span class="n">cfg_gen_file</span><span class="o">=</span><span class="n">cfg_gen_file</span><span class="p">))</span><span class="o">.</span><span class="n">exits_with_err_code</span><span class="p">(</span><span class="n">ENC_ERR_DATA_FORMAT_ERR</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="decipher-strategy-missing-from-commit-section">
+<h3>7) <code class="docutils literal notranslate"><span class="pre">decipher-strategy</span></code> missing from commit section<a class="headerlink" href="#decipher-strategy-missing-from-commit-section" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">decipher-strategy</span></code> is the key which facilitates <strong>commit</strong> related decryption and/or descrambling and hence must be present in a commit-related section.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># FAULTY config</span>
+<span class="c1"># ; VERSION = v0</span>
+<span class="c1">#</span>
+<span class="c1"># Required ``decipher-strategy`` key missing</span>
+
+<span class="c1"># Encrypt/Decrypt and/or Scramble/Descramble commit messages</span>
+<span class="c1"># Strategies can read inputs from stdin and write to stdout</span>
+<span class="k">[&lt;commit-message&gt;|&lt;commit-author-name&gt;]</span>
+<span class="na">cipher-strategy</span><span class="o">=</span><span class="s">enc randomize 10 io --per-line | enc randomize 10 io | enc offset 2 io --per-line</span>
+<span class="c1"># decipher-strategy=enc offset 2 io --per-line -i | enc randomize 10 io -i | enc randomize 10 io --per-line -i</span>
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>enc<span class="w"> </span>gc<span class="w"> </span>-k<span class="w"> </span><span class="o">{</span>key_file<span class="o">}</span><span class="w"> </span>-i<span class="w"> </span><span class="se">\&quot;</span>%<span class="o">(</span>cfg_gen_file<span class="o">)</span>s<span class="se">\&quot;</span><span class="w"> </span>-o<span class="w"> </span><span class="o">{</span>dummy_file<span class="o">}</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cfg_gen_file</span> <span class="o">=</span> <span class="n">full_path</span><span class="p">(</span><span class="s1">&#39;generate-config-static/decipher-key-missing-gen-config.ini&#39;</span><span class="p">)</span>
+<span class="n">EncGCCLITest</span><span class="p">(</span><span class="n">command</span> <span class="o">%</span> <span class="nb">dict</span><span class="p">(</span><span class="n">cfg_gen_file</span><span class="o">=</span><span class="n">cfg_gen_file</span><span class="p">))</span><span class="o">.</span><span class="n">exits_with_err_code</span><span class="p">(</span><span class="n">ENC_ERR_DATA_FORMAT_ERR</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Command text in {} such as {non_existing_process_stage} and {key_file} are test fixtures. Check them out at <a class="reference external" href="../_static/enc-cli-help.md">../_static/enc-cli-help.md</a>.</p>
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">enc-code</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Subcommands:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="enc-init-cli.html">init</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enc-manip-cli.html">manip</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">generate-config</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#enc.generate_config-get_main_command_parser-positional-arguments">Positional Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enc.generate_config-get_main_command_parser-named-arguments">Named Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#command-examples">Command Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples-for-gen-config">Examples for gen config</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="enc-refresh-cli.html">refresh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enc-process-cli.html">process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enc-commit-cli.html">commit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enc-pull-cli.html">pull</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enc-push-cli.html">push</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enc-snapshot-cli.html">snapshot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enc-rev-snapshot-cli.html">rev-snapshot</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Configuration files:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../etc/v0/etc-config.html">V0 style config</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="enc-manip-cli.html" title="previous chapter">manip</a></li>
+      <li>Next: <a href="enc-refresh-cli.html" title="next chapter">refresh</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Suhas Krishna Srivastava.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.0.2</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../_sources/enc/enc-generate-config-cli.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

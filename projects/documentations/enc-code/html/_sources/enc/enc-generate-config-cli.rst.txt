@@ -1,0 +1,443 @@
+################
+generate-config
+################
+
+.. |GEN_CFG_DOCS_DIR| replace:: docs/source/enc
+
+.. argparse::
+    :module: enc.generate_config
+    :func: get_main_command_parser
+    :prog: enc generate-config
+
+=================
+Command Examples
+=================
+
+``gc`` is an alias of ``generate-config``.
+
+.. testsetup:: *
+
+    import os
+    import pathlib
+    import enc.generate_config
+    from tests.test_enc.test_init import EncInitCLITest
+    from tests.test_enc.test_generate_config import EncGCCLITest
+
+    def full_path(path):
+        this_dir = pathlib.Path(os.getcwd(), '|GEN_CFG_DOCS_DIR|')
+        return pathlib.Path(this_dir, path)
+
+1) Normal run
+=============
+
+Generate the config using key file, input config and output config path
+
+.. |normal_run_command| replace:: enc gc -k {key_file} -i {config_gen_file} -o {dummy_file}
+
+.. code-block:: shell
+
+    |normal_run_command|
+
+.. testsetup:: normal_run_command
+
+    command = "|normal_run_command|"
+
+.. testcode:: normal_run_command
+
+    EncGCCLITest(command).run()
+
+2) Can Output to ``stdout`` if ``-o`` option is absent
+======================================================
+
+Outputs to ``stdout`` if ``-o`` option is absent.
+
+.. |stdout_o_run_command| replace:: enc gc -k {key_file} -i {config_gen_file} > {dummy_file}
+
+.. code-block:: shell
+
+    |stdout_o_run_command|
+
+.. testsetup:: stdout_o_run_command
+
+    from tests.test_enc import StrictCLITest
+    command = "|stdout_o_run_command|"
+
+.. testcode:: stdout_o_run_command
+
+    StrictCLITest(command).run()
+
+3) Can Output to ``stdout`` if ``-o`` option is ``-``
+=====================================================
+
+Outputs to ``stdout`` if ``-o`` option is ``-``.
+
+.. |stdout_dash_run_command| replace:: enc gc -k {key_file} -i {config_gen_file} -o - > {dummy_file}
+
+.. code-block:: shell
+
+    |stdout_dash_run_command|
+
+.. testsetup:: stdout_dash_run_command
+
+    from tests.test_enc import StrictCLITest
+    command = "|stdout_dash_run_command|"
+
+.. testcode:: stdout_dash_run_command
+
+    StrictCLITest(command).run()
+
+4) Input File is mandatory in CLI argument
+==========================================
+
+Input files must be always be provided.
+
+.. |input_file_required_command| replace:: enc gc -k {key_file}
+
+.. code-block:: shell
+
+    |input_file_required_command|
+
+.. testsetup:: input_file_required_command
+
+    from enc.helpers.error_codes import ENC_ERR_INVALID_USAGE
+    command = "|input_file_required_command|"
+
+.. testcode:: input_file_required_command
+
+    EncGCCLITest(command).exits_with_err_code(ENC_ERR_INVALID_USAGE)
+
+5) Does not accept input files from ``stdin``
+=============================================
+
+``-`` argument to -i instructs program to read input-file from ``stdin`` and since input-file details are
+later required for encryption and hence ``-`` is disallowed as an input value for -i.
+
+.. |dash_input_file_command| replace:: enc gc -i -
+
+.. code-block:: shell
+
+    |dash_input_file_command|
+
+.. testsetup:: dash_input_file_command
+
+    from enc.helpers.error_codes import ENC_ERR_INVALID_USAGE
+    command = "|dash_key_file_command|"
+
+.. testcode:: dash_input_file_command
+
+    EncGCCLITest(command).exits_with_err_code(ENC_ERR_INVALID_USAGE)
+
+6) Key File is mandatory in CLI argument
+========================================
+
+The config file may contain encryption and decryption keys which can use the key-file. This makes the key-file
+required in the CLI argument list.
+
+.. |key_file_required_command| replace:: enc gc -i {config_gen_file}
+
+.. code-block:: shell
+
+    |key_file_required_command|
+
+.. testsetup:: key_file_required_command
+
+    from enc.helpers.error_codes import ENC_ERR_INVALID_USAGE
+    command = "|key_file_required_command|"
+
+.. testcode:: key_file_required_command
+
+    EncGCCLITest(command).exits_with_err_code(ENC_ERR_INVALID_USAGE)
+
+7) Does not accept key files from ``stdin``
+===========================================
+
+``-`` argument to -k/--key-file instructs program to read key-file from ``stdin`` and since key-file details are
+later required for encryption and hence ``-`` is disallowed as an input value for -k/--key-file.
+
+.. |dash_key_file_command| replace:: enc gc -k -
+
+.. code-block:: shell
+
+    |dash_key_file_command|
+
+.. testsetup:: dash_key_file_command
+
+    from enc.helpers.error_codes import ENC_ERR_INVALID_USAGE
+    command = "|dash_key_file_command|"
+
+.. testcode:: dash_key_file_command
+
+    EncGCCLITest(command).exits_with_err_code(ENC_ERR_INVALID_USAGE)
+
+8) Does not accept non-existing key files
+=========================================
+
+Absent key files obviously do not provide any keys which will disallow encryption/decryption of the vcs tree.
+
+.. |non_existing_key_file_command| replace:: enc gc -k {non_existing_key_file}
+
+.. code-block:: shell
+
+    |non_existing_key_file_command|
+
+.. testsetup:: non_existing_key_file_command
+
+    from enc.helpers.error_codes import ENC_ERR_INVALID_USAGE
+    command = "|non_existing_key_file_command|"
+
+.. testcode:: non_existing_key_file_command
+
+    EncGCCLITest(command).exits_with_err_code(ENC_ERR_INVALID_USAGE)
+
+9) Can take inputs from config gen files and write to config files
+==================================================================
+
+Config gen files can be provided as inputs from CLI using the ``-i`` option. Similarly output can be written to a file passed to the ``-o`` option.
+
+.. |cfg_gen_from_file_command| replace:: enc gc -k {key_file} -i {config_gen_file} -o {dummy_file}
+
+.. code-block:: shell
+
+    |cfg_gen_from_file_command|
+
+.. testsetup:: cfg_gen_from_file_command
+
+    from enc.helpers.error_codes import ENC_ERR_INVALID_USAGE
+    command = "|cfg_gen_from_file_command|"
+
+.. testcode:: cfg_gen_from_file_command
+
+    EncGCCLITest(command).run()
+
+10) Can write generated config file as output to to stdout using IO redirection
+===============================================================================
+
+Config gen files can be written as outputs to ``stdout`` using IO redirection when ``-o`` option is absent.
+
+.. |cfg_to_stdout_command| replace:: enc generate-config -k {key_file} -i {config_gen_file} > {dummy_file}
+
+.. code-block:: shell
+
+    |cfg_to_stdout_command|
+
+.. testsetup:: cfg_to_stdout_command
+
+    from enc.helpers.error_codes import ENC_ERR_INVALID_USAGE
+    from tests.test_enc import StrictCLITest
+    command = "|cfg_to_stdout_command|"
+
+.. testcode:: cfg_to_stdout_command
+
+    StrictCLITest(command).run()
+
+11)  Does not accept unregistered config-versions
+=================================================
+
+Only registered config-version:
+
+1. ``v0`` (default)
+
+can be supplied.
+
+.. |config_version_specifier_command| replace:: enc gc --config-version unregistered -k {key_file}
+
+.. code-block:: shell
+
+    |config_version_specifier_command|
+
+.. testsetup:: config_version_specifier_command
+
+    from enc.helpers.error_codes import ENC_ERR_INVALID_USAGE
+    command = "|config_version_specifier_command|"
+
+.. testcode:: config_version_specifier_command
+
+    EncGCCLITest(command).exits_with_err_code(ENC_ERR_INVALID_USAGE)
+
+=======================
+Examples for gen config
+=======================
+
+1) Correct run with full-featured sample gen-config
+===================================================
+
+.. |correct_config_gen_sample| replace:: sample-correct-gen-config.ini
+
+.. substituting-raw:: html
+
+    Full-featured sample gen-config: <a href="../_static/|correct_config_gen_sample|">sample-correct-gen-config</a>
+
+.. |correct_config_gen_sample_command| replace:: enc gc -k {key_file} -i \"%(cfg_gen_file)s\" -o {dummy_file}
+
+.. code-block:: shell
+
+    |correct_config_gen_sample_command|
+
+.. testsetup:: correct_config_gen_sample_command
+
+    import pathlib
+    command = "|correct_config_gen_sample_command|"
+
+.. testcode:: correct_config_gen_sample_command
+
+    cfg_gen_file = full_path(pathlib.Path('generate-config-static', '|correct_config_gen_sample|'))
+    EncGCCLITest(command % dict(cfg_gen_file=cfg_gen_file)).run()
+
+2) ``enc-file`` missing from file-name section
+==============================================
+
+.. |enc_file_key_config_gen_sample| replace:: generate-config-static/enc-file-key-missing-gen-config.ini
+
+``enc-file`` is the key which facilitates **file** encryption and/or scrambling and hence must be present in a file section.
+
+.. literalinclude:: |enc_file_key_config_gen_sample|
+    :language: ini
+
+.. |enc_file_key_config_gen_sample_command| replace:: enc gc -k {key_file} -i \"%(cfg_gen_file)s\" -o {dummy_file}
+
+.. code-block:: shell
+
+    |enc_file_key_config_gen_sample_command|
+
+.. testsetup:: enc_file_key_config_gen_sample_command
+
+    from enc.helpers.error_codes import ENC_ERR_DATA_FORMAT_ERR
+    command = "|enc_file_key_config_gen_sample_command|"
+
+.. testcode:: enc_file_key_config_gen_sample_command
+
+    cfg_gen_file = full_path('|enc_file_key_config_gen_sample|')
+    EncGCCLITest(command % dict(cfg_gen_file=cfg_gen_file)).exits_with_err_code(ENC_ERR_DATA_FORMAT_ERR)
+
+3) ``dec-file`` missing from file-name section
+==============================================
+
+.. |dec_file_key_config_gen_sample| replace:: generate-config-static/dec-file-key-missing-gen-config.ini
+
+``dec-file`` is the key which facilitates **file** decryption and/or descrambling and hence must be present in a file section.
+
+.. literalinclude:: |dec_file_key_config_gen_sample|
+    :language: ini
+
+.. |dec_file_key_config_gen_sample_command| replace:: enc gc -k {key_file} -i \"%(cfg_gen_file)s\" -o {dummy_file}
+
+.. code-block:: shell
+
+    |dec_file_key_config_gen_sample_command|
+
+.. testsetup:: dec_file_key_config_gen_sample_command
+
+    from enc.helpers.error_codes import ENC_ERR_DATA_FORMAT_ERR
+    command = "|dec_file_key_config_gen_sample_command|"
+
+.. testcode:: dec_file_key_config_gen_sample_command
+
+    cfg_gen_file = full_path('|dec_file_key_config_gen_sample|')
+    EncGCCLITest(command % dict(cfg_gen_file=cfg_gen_file)).exits_with_err_code(ENC_ERR_DATA_FORMAT_ERR)
+
+4) ``dec-file-name`` missing from file-name section
+===================================================
+
+.. |dec_filename_key_config_gen_sample| replace:: generate-config-static/dec-filename-key-missing-gen-config.ini
+
+``dec-file-name`` is the key which facilitates **filename** decryption and/or descrambling and hence must be present in a file section.
+
+.. literalinclude:: |dec_filename_key_config_gen_sample|
+    :language: ini
+
+.. |dec_filename_key_config_gen_sample_command| replace:: enc gc -k {key_file} -i \"%(cfg_gen_file)s\" -o {dummy_file}
+
+.. code-block:: shell
+
+    |dec_filename_key_config_gen_sample_command|
+
+.. testsetup:: dec_filename_key_config_gen_sample_command
+
+    from enc.helpers.error_codes import ENC_ERR_DATA_FORMAT_ERR
+    command = "|dec_filename_key_config_gen_sample_command|"
+
+.. testcode:: dec_filename_key_config_gen_sample_command
+
+    cfg_gen_file = full_path('|dec_filename_key_config_gen_sample|')
+    EncGCCLITest(command % dict(cfg_gen_file=cfg_gen_file)).exits_with_err_code(ENC_ERR_DATA_FORMAT_ERR)
+
+5) ``enc-file-name`` missing from file-name section
+===================================================
+
+.. |enc_filename_key_config_gen_sample| replace:: generate-config-static/enc-filename-key-missing-gen-config.ini
+
+``enc-file-name`` is the key which facilitates **filename** encryption and/or scrambling and hence must be present in a file section.
+
+.. literalinclude:: |enc_filename_key_config_gen_sample|
+    :language: ini
+
+.. |enc_filename_key_config_gen_sample_command| replace:: enc gc -k {key_file} -i \"%(cfg_gen_file)s\" -o {dummy_file}
+
+.. code-block:: shell
+
+    |enc_filename_key_config_gen_sample_command|
+
+.. testsetup:: enc_filename_key_config_gen_sample_command
+
+    from enc.helpers.error_codes import ENC_ERR_DATA_FORMAT_ERR
+    command = "|enc_filename_key_config_gen_sample_command|"
+
+.. testcode:: enc_filename_key_config_gen_sample_command
+
+    cfg_gen_file = full_path('|enc_filename_key_config_gen_sample|')
+    EncGCCLITest(command % dict(cfg_gen_file=cfg_gen_file)).exits_with_err_code(ENC_ERR_DATA_FORMAT_ERR)
+
+6) ``cipher-strategy`` missing from commit section
+===================================================
+
+.. |cipher_key_config_gen_sample| replace:: generate-config-static/cipher-key-missing-gen-config.ini
+
+``cipher-strategy`` is the key which facilitates **commit** related encryption and/or scrambling and hence must be present in a commit-related section.
+
+.. literalinclude:: |cipher_key_config_gen_sample|
+    :language: ini
+
+.. |cipher_key_config_gen_sample_command| replace:: enc gc -k {key_file} -i \"%(cfg_gen_file)s\" -o {dummy_file}
+
+.. code-block:: shell
+
+    |cipher_key_config_gen_sample_command|
+
+.. testsetup:: cipher_key_config_gen_sample_command
+
+    from enc.helpers.error_codes import ENC_ERR_DATA_FORMAT_ERR
+    command = "|cipher_key_config_gen_sample_command|"
+
+.. testcode:: cipher_key_config_gen_sample_command
+
+    cfg_gen_file = full_path('|cipher_key_config_gen_sample|')
+    EncGCCLITest(command % dict(cfg_gen_file=cfg_gen_file)).exits_with_err_code(ENC_ERR_DATA_FORMAT_ERR)
+
+7) ``decipher-strategy`` missing from commit section
+====================================================
+
+.. |decipher_key_config_gen_sample| replace:: generate-config-static/decipher-key-missing-gen-config.ini
+
+``decipher-strategy`` is the key which facilitates **commit** related decryption and/or descrambling and hence must be present in a commit-related section.
+
+.. literalinclude:: |decipher_key_config_gen_sample|
+    :language: ini
+
+.. |decipher_key_config_gen_sample_command| replace:: enc gc -k {key_file} -i \"%(cfg_gen_file)s\" -o {dummy_file}
+
+.. code-block:: shell
+
+    |decipher_key_config_gen_sample_command|
+
+.. testsetup:: decipher_key_config_gen_sample_command
+
+    from enc.helpers.error_codes import ENC_ERR_DATA_FORMAT_ERR
+    command = "|decipher_key_config_gen_sample_command|"
+
+.. testcode:: decipher_key_config_gen_sample_command
+
+    cfg_gen_file = full_path('|decipher_key_config_gen_sample|')
+    EncGCCLITest(command % dict(cfg_gen_file=cfg_gen_file)).exits_with_err_code(ENC_ERR_DATA_FORMAT_ERR)
+
+
+.. include:: enc-fixture-detail.rst

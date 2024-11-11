@@ -1,0 +1,1 @@
+Command text in {} such as {non_existing_process_stage} and {key_file} are test fixtures. Check them out at `<../_static/enc-cli-help.md>`_.

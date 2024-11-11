@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>V0 style config &#8212; enc-code 0.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/basic.css?v=c058f7c8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=27fed22d" />
+    <script src="../../_static/documentation_options.js?v=7026087e"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="rev-snapshot" href="../../enc/enc-rev-snapshot-cli.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="v0-style-config">
+<h1>V0 style config<a class="headerlink" href="#v0-style-config" title="Link to this heading">¶</a></h1>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading">¶</a></h2>
+<p>V0-style config files support all the features of python’s configparser parseable configs plus allows features such as:</p>
+</section>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ORed</span></code> sections:</p></li>
+</ol>
+<p>These kind of sections can declare multiple elements in the same section for duplication of key-value pairs using the V0-style delimiter (<code class="docutils literal notranslate"><span class="pre">|</span></code>), for e.g.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># Motivation for ORed section</span>
+<span class="c1"># section1 and section2 have the same keys and values</span>
+<span class="c1"># ; VERSION = v0</span>
+
+
+<span class="k">[section1]</span>
+<span class="na">k1</span><span class="o">=</span><span class="s">v1</span>
+<span class="na">k2</span><span class="o">=</span><span class="s">v2</span>
+
+<span class="k">[section2]</span>
+<span class="na">k1</span><span class="o">=</span><span class="s">v1</span>
+<span class="na">k2</span><span class="o">=</span><span class="s">v2</span>
+</pre></div>
+</div>
+<p>Similar sections can be combined using <code class="docutils literal notranslate"><span class="pre">|</span></code>, for e.g.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># ORed section demonstration</span>
+<span class="c1"># section1 and section2 can be combined in the same section using v0 style delimiter (|), like so</span>
+<span class="c1"># ; VERSION = v0</span>
+
+
+<span class="k">[section1|section2]</span>
+<span class="na">k1</span><span class="o">=</span><span class="s">v1</span>
+<span class="na">k2</span><span class="o">=</span><span class="s">v2</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">full_path</span><span class="p">(</span><span class="s1">&#39;ORed-section-motivation-cfg.ini&#39;</span><span class="p">))</span> <span class="k">as</span> <span class="n">mf</span><span class="p">:</span>
+    <span class="n">motive_dict</span> <span class="o">=</span> <span class="n">EtcTest</span><span class="p">(</span><span class="n">mf</span><span class="p">,</span> <span class="n">EncConfigParser</span><span class="o">.</span><span class="n">for_version</span><span class="p">(</span><span class="n">ConfigVersion</span><span class="o">.</span><span class="n">v0</span><span class="p">))</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">full_path</span><span class="p">(</span><span class="s1">&#39;ORed-section-demonstration-cfg.ini&#39;</span><span class="p">))</span> <span class="k">as</span> <span class="n">df</span><span class="p">:</span>
+    <span class="n">demo_dict</span> <span class="o">=</span> <span class="n">EtcTest</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">EncConfigParser</span><span class="o">.</span><span class="n">for_version</span><span class="p">(</span><span class="n">ConfigVersion</span><span class="o">.</span><span class="n">v0</span><span class="p">))</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="k">assert</span> <span class="n">motive_dict</span> <span class="o">==</span> <span class="n">demo_dict</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><code class="docutils literal notranslate"><span class="pre">*</span></code> or the default section:</p></li>
+</ol>
+<p>These sections match any unmatched key, for e.g.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># Default or * section demonstration</span>
+<span class="c1"># ; VERSION = v0</span>
+
+<span class="k">[section1|section2]</span>
+<span class="na">k1</span><span class="o">=</span><span class="s">v1</span>
+<span class="na">k2</span><span class="o">=</span><span class="s">v2</span>
+
+<span class="c1"># * or the DEFAULT section</span>
+<span class="k">[*]</span>
+<span class="na">k1</span><span class="o">=</span><span class="s">v2</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">full_path</span><span class="p">(</span><span class="s1">&#39;default-section-demonstration-cfg.ini&#39;</span><span class="p">))</span> <span class="k">as</span> <span class="n">mf</span><span class="p">:</span>
+    <span class="n">etc_test</span> <span class="o">=</span> <span class="n">EtcTest</span><span class="p">(</span><span class="n">mf</span><span class="p">,</span> <span class="n">EncConfigParser</span><span class="o">.</span><span class="n">for_version</span><span class="p">(</span><span class="n">ConfigVersion</span><span class="o">.</span><span class="n">v0</span><span class="p">))</span>
+    <span class="n">etc_test</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>                                        <span class="c1"># initialise the parser</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">etc_test</span><span class="o">.</span><span class="n">config_parser</span><span class="o">.</span><span class="n">get_section</span><span class="p">(</span><span class="s1">&#39;section1&#39;</span><span class="p">)</span>    <span class="c1"># section1 is present and hence no error is thrown</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">etc_test</span><span class="o">.</span><span class="n">config_parser</span><span class="o">.</span><span class="n">get_section</span><span class="p">(</span><span class="s1">&#39;section2&#39;</span><span class="p">)</span>    <span class="c1"># section2 is present and hence no error is thrown</span>
+    <span class="n">st_section</span> <span class="o">=</span> <span class="n">etc_test</span><span class="o">.</span><span class="n">config_parser</span><span class="o">.</span><span class="n">get_section</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">)</span>  <span class="c1"># * or the default section is present and hence no error is thrown</span>
+    <span class="k">assert</span> <span class="n">st_section</span> <span class="o">==</span> <span class="n">etc_test</span><span class="o">.</span><span class="n">config_parser</span><span class="o">.</span><span class="n">get_section</span><span class="p">(</span><span class="s1">&#39;untitled&#39;</span><span class="p">)</span>   <span class="c1"># There is no untitled section so this section is defaulted to the * section</span>
+</pre></div>
+</div>
+</section>
+<section id="restrictions">
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Section names cannot start with delimiter (<code class="docutils literal notranslate"><span class="pre">|</span></code>)</p></li>
+</ol>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># Section starting with delimiter</span>
+<span class="c1"># ; VERSION = v0</span>
+
+
+<span class="k">[|section]</span>
+<span class="na">k</span><span class="o">=</span><span class="s">v</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">full_path</span><span class="p">(</span><span class="s1">&#39;ORed-section-starting-with-delimiter.ini&#39;</span><span class="p">))</span> <span class="k">as</span> <span class="n">mf</span><span class="p">:</span>
+    <span class="n">EtcTest</span><span class="p">(</span><span class="n">mf</span><span class="p">,</span> <span class="n">EncConfigParser</span><span class="o">.</span><span class="n">for_version</span><span class="p">(</span><span class="n">ConfigVersion</span><span class="o">.</span><span class="n">v0</span><span class="p">))</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="n">EncConfigError</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Section names cannot end with delimiter (<code class="docutils literal notranslate"><span class="pre">|</span></code>)</p></li>
+</ol>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># Section ending with delimiter</span>
+<span class="c1"># ; VERSION = v0</span>
+
+
+<span class="k">[section|]</span>
+<span class="na">k</span><span class="o">=</span><span class="s">v</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">full_path</span><span class="p">(</span><span class="s1">&#39;ORed-section-ending-with-delimiter.ini&#39;</span><span class="p">))</span> <span class="k">as</span> <span class="n">mf</span><span class="p">:</span>
+    <span class="n">EtcTest</span><span class="p">(</span><span class="n">mf</span><span class="p">,</span> <span class="n">EncConfigParser</span><span class="o">.</span><span class="n">for_version</span><span class="p">(</span><span class="n">ConfigVersion</span><span class="o">.</span><span class="n">v0</span><span class="p">))</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="n">EncConfigError</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Duplication across/outside sections is not allowed</p></li>
+</ol>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># Duplication outside section demonstration</span>
+<span class="c1"># ERROR: section1 is redefined in [section1|section2] section.</span>
+<span class="c1"># ; VERSION = v0</span>
+
+
+<span class="k">[section1]</span>
+<span class="na">k1</span><span class="o">=</span><span class="s">v1</span>
+
+<span class="k">[section1|section2]</span>
+<span class="na">k1</span><span class="o">=</span><span class="s">v1</span>
+<span class="na">k2</span><span class="o">=</span><span class="s">v2</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">full_path</span><span class="p">(</span><span class="s1">&#39;duplication-outside-section-cfg.ini&#39;</span><span class="p">))</span> <span class="k">as</span> <span class="n">mf</span><span class="p">:</span>
+    <span class="n">EtcTest</span><span class="p">(</span><span class="n">mf</span><span class="p">,</span> <span class="n">EncConfigParser</span><span class="o">.</span><span class="n">for_version</span><span class="p">(</span><span class="n">ConfigVersion</span><span class="o">.</span><span class="n">v0</span><span class="p">))</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="n">EncConfigError</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Duplication within sections is not allowed</p></li>
+</ol>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># Duplication within section demonstration</span>
+<span class="c1"># ERROR: section1 is defined twice in [section1|section2|section1] section.</span>
+<span class="c1"># ; VERSION = v0</span>
+
+
+<span class="k">[section1|section2|section1]</span>
+<span class="na">k1</span><span class="o">=</span><span class="s">v1</span>
+<span class="na">k2</span><span class="o">=</span><span class="s">v2</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">full_path</span><span class="p">(</span><span class="s1">&#39;duplication-within-section-cfg.ini&#39;</span><span class="p">))</span> <span class="k">as</span> <span class="n">mf</span><span class="p">:</span>
+    <span class="n">EtcTest</span><span class="p">(</span><span class="n">mf</span><span class="p">,</span> <span class="n">EncConfigParser</span><span class="o">.</span><span class="n">for_version</span><span class="p">(</span><span class="n">ConfigVersion</span><span class="o">.</span><span class="n">v0</span><span class="p">))</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="n">EncConfigError</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>Sections starting with space/spaces are not allowed</p></li>
+</ol>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># FAULTY section config</span>
+<span class="c1"># sections cannot start with space/spaces</span>
+<span class="c1"># ; VERSION = v0</span>
+
+
+<span class="k">[ section starting with space]</span>
+<span class="na">k1</span><span class="o">=</span><span class="s">v1</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">full_path</span><span class="p">(</span><span class="s1">&#39;section-starting-with-space-cfg.ini&#39;</span><span class="p">))</span> <span class="k">as</span> <span class="n">mf</span><span class="p">:</span>
+    <span class="n">EtcTest</span><span class="p">(</span><span class="n">mf</span><span class="p">,</span> <span class="n">EncConfigParser</span><span class="o">.</span><span class="n">for_version</span><span class="p">(</span><span class="n">ConfigVersion</span><span class="o">.</span><span class="n">v0</span><span class="p">))</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="n">EncConfigError</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="6">
+<li><p>Sections ending with space/spaces are not allowed</p></li>
+</ol>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># FAULTY section config</span>
+<span class="c1"># sections cannot end with space/spaces</span>
+<span class="c1"># ; VERSION = v0</span>
+
+
+<span class="k">[section ending with space ]</span>
+<span class="na">k1</span><span class="o">=</span><span class="s">v1</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">full_path</span><span class="p">(</span><span class="s1">&#39;section-ending-with-space-cfg.ini&#39;</span><span class="p">))</span> <span class="k">as</span> <span class="n">mf</span><span class="p">:</span>
+    <span class="n">EtcTest</span><span class="p">(</span><span class="n">mf</span><span class="p">,</span> <span class="n">EncConfigParser</span><span class="o">.</span><span class="n">for_version</span><span class="p">(</span><span class="n">ConfigVersion</span><span class="o">.</span><span class="n">v0</span><span class="p">))</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="n">EncConfigError</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="7">
+<li><p>Sections starting and ending with space/spaces are not allowed</p></li>
+</ol>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># FAULTY section config</span>
+<span class="c1"># sections cannot start and end with space/spaces</span>
+<span class="c1"># ; VERSION = v0</span>
+
+
+<span class="k">[ section starting and ending with space ]</span>
+<span class="na">k1</span><span class="o">=</span><span class="s">v1</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">full_path</span><span class="p">(</span><span class="s1">&#39;section-starting-ending-with-space-cfg.ini&#39;</span><span class="p">))</span> <span class="k">as</span> <span class="n">mf</span><span class="p">:</span>
+    <span class="n">EtcTest</span><span class="p">(</span><span class="n">mf</span><span class="p">,</span> <span class="n">EncConfigParser</span><span class="o">.</span><span class="n">for_version</span><span class="p">(</span><span class="n">ConfigVersion</span><span class="o">.</span><span class="n">v0</span><span class="p">))</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="n">EncConfigError</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">enc-code</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Subcommands:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../enc/enc-init-cli.html">init</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enc/enc-manip-cli.html">manip</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enc/enc-generate-config-cli.html">generate-config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enc/enc-refresh-cli.html">refresh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enc/enc-process-cli.html">process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enc/enc-commit-cli.html">commit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enc/enc-pull-cli.html">pull</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enc/enc-push-cli.html">push</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enc/enc-snapshot-cli.html">snapshot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enc/enc-rev-snapshot-cli.html">rev-snapshot</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Configuration files:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">V0 style config</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#restrictions">Restrictions</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../../enc/enc-rev-snapshot-cli.html" title="previous chapter">rev-snapshot</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Suhas Krishna Srivastava.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.0.2</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../../_sources/etc/v0/etc-config.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

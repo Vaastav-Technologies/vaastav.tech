@@ -1,0 +1,125 @@
+########
+refresh
+########
+
+.. argparse::
+    :module: enc.refresh
+    :func: get_main_command_parser
+    :prog: enc refresh
+
+===============
+Examples
+===============
+
+.. |enc_init_command| replace:: enc init {non_existing_process_stage} -k {key_file} -qq
+
+All commands are run in a working-tree repo root initialised by:
+
+.. code-block:: shell
+
+    |enc_init_command|
+
+.. testsetup:: *
+
+    import enc.refresh
+    from tests.test_enc import StrictCLITest
+
+1) Normal run
+==============
+
+Run command on repo root to refresh **all** the directive files.
+
+.. |normal_run_command| replace:: enc refresh
+
+.. code-block:: shell
+
+    |normal_run_command|
+
+.. testsetup:: normal_run_command
+
+    command = "|enc_init_command| && |normal_run_command|"
+
+.. testcode:: normal_run_command
+
+    # Run from repo root
+    StrictCLITest(command).run()
+
+2) Refresh certain directive file
+=================================
+
+Refresh only certain directive file in case ``enc refresh`` supports many director files.
+
+.. |refresh_certain_directive_file_command| replace:: enc refresh .enc/config
+
+.. code-block:: shell
+
+    |refresh_certain_directive_file_command|
+
+.. testsetup:: refresh_certain_directive_file_command
+
+    command = "|enc_init_command| && |refresh_certain_directive_file_command|"
+
+.. testcode:: refresh_certain_directive_file_command
+
+    StrictCLITest(command).run()
+
+3) Refresh certain multiple directive files
+===========================================
+
+Multiple director files can be specified if only the corresponding directive files need to be refreshed.
+
+.. |refresh_certain_multiple_directive_file_command| replace:: enc refresh .enc/config .enc/config .enc/config
+
+.. code-block:: shell
+
+    |refresh_certain_multiple_directive_file_command|
+
+.. testsetup:: refresh_certain_multiple_directive_file_command
+
+    command = "|enc_init_command| && |refresh_certain_multiple_directive_file_command|"
+
+.. testcode:: refresh_certain_multiple_directive_file_command
+
+    StrictCLITest(command).run()
+
+4) Force mode enables processing always
+=======================================
+
+Usually directive files are picked-up for processing if it is older than the director file. To refresh all directive files
+even when they're newer than the director files use ``-f`` or ``--force`` option.
+
+.. |normal_run_command_force| replace:: enc refresh -f
+
+.. code-block:: shell
+
+    |normal_run_command_force|
+
+.. testsetup:: normal_run_command_force
+
+    command = "|enc_init_command| && |normal_run_command_force|"
+
+.. testcode:: normal_run_command_force
+
+    StrictCLITest(command).run()
+
+5) Force mode enables processing for certain director files
+============================================================
+
+Usually directive files are picked-up for processing if it is older than the director file. To refresh certain directive files
+even when they're newer than the director files use ``-f`` or ``--force`` option.
+
+.. |normal_run_certain_command_force| replace:: enc refresh .enc/config .enc/config -f
+
+.. code-block:: shell
+
+    |normal_run_certain_command_force|
+
+.. testsetup:: normal_run_certain_command_force
+
+    command = "|enc_init_command| && |normal_run_certain_command_force|"
+
+.. testcode:: normal_run_certain_command_force
+
+    StrictCLITest(command).run()
+
+.. include:: enc-fixture-detail.rst
