@@ -91,3 +91,13 @@ a:hover {
     margin-top: 20px;
     font-size: 0.9rem;
 }
+
+.highlight {
+    background-color: #3bff93;
+    padding: 10px;
+    border-radius: 5px;
+    color: #333;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
