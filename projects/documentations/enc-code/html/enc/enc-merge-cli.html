@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>commit &#8212; enc-code 0.0.0 documentation</title>
+    <title>merge &#8212; enc-code 0.0.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d1102ebc" />
     <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=c058f7c8" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
@@ -14,8 +14,8 @@
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="fetch" href="enc-fetch-cli.html" />
-    <link rel="prev" title="status" href="enc-status-cli.html" />
+    <link rel="next" title="pull" href="enc-pull-cli.html" />
+    <link rel="prev" title="fetch" href="enc-fetch-cli.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -33,18 +33,17 @@
 
           <div class="body" role="main">
             
-  <section id="commit">
-<h1>commit<a class="headerlink" href="#commit" title="Link to this heading">¶</a></h1>
-<p><p>Command equivalent to <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>.</p>
-<p>Commit files in the process-stage with encrypted commit message.</p>
-<p>Restricted options: {’–allow-empty’, ‘-i’, ‘–patch’, ‘–only’, ‘-o’, ‘–’, ‘–edit’, ‘–fixup’, ‘–pathspec-from-file’, ‘-e’, ‘–pathspec-file-nul’, ‘–template’, ‘–squash’, ‘–include’, ‘–status’, ‘-c’, ‘–cleanup’, ‘–interactive’, ‘-t’, ‘–allow-empty-message’, ‘–no-status’, ‘-p’, ‘–reedit-message’}.</p>
-<p>{’–null’, ‘–long’, ‘–short’, ‘–dry-run’, ‘–porcelain’, ‘-z’} imply dry-run mode.</p>
+  <section id="merge">
+<h1>merge<a class="headerlink" href="#merge" title="Link to this heading">¶</a></h1>
+<p><p>Command equivalent to <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code>.</p>
+<p>Merge branches/commits in the process-stage with encrypted merge message.</p>
+<p>Restricted options: {’–into-name’, ‘–cleanup’, ‘–log’, ‘–edit’, ‘–no-squash’, ‘-e’, ‘–no-log’, ‘–squash’}.</p>
 </p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">enc</span> <span class="n">commit</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">v</span> <span class="o">|</span> <span class="o">-</span><span class="n">q</span><span class="p">]</span> <span class="p">(</span><span class="o">-</span><span class="n">m</span> <span class="n">MESSAGE</span> <span class="o">|</span> <span class="o">-</span><span class="n">F</span> <span class="n">FILE</span> <span class="o">|</span> <span class="o">-</span><span class="n">C</span> <span class="n">REUSE_MESSAGE</span><span class="p">)</span> <span class="p">[</span><span class="o">--</span><span class="n">trailer</span> <span class="n">TRAILER</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">s</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">signoff</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">enc</span> <span class="n">merge</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">v</span> <span class="o">|</span> <span class="o">-</span><span class="n">q</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">m</span> <span class="n">MESSAGE</span> <span class="o">|</span> <span class="o">-</span><span class="n">F</span> <span class="n">FILE</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">signoff</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">signoff</span><span class="p">]</span>
 </pre></div>
 </div>
-<section id="enc.commit-get_main_command_parser-named-arguments">
-<h2>Named Arguments<a class="headerlink" href="#enc.commit-get_main_command_parser-named-arguments" title="Link to this heading">¶</a></h2>
+<section id="enc.merge-get_main_command_parser-named-arguments">
+<h2>Named Arguments<a class="headerlink" href="#enc.merge-get_main_command_parser-named-arguments" title="Link to this heading">¶</a></h2>
 <dl class="option-list">
 <dt><kbd>-v, --verbose</kbd></dt>
 <dd><dl class="simple">
@@ -68,8 +67,8 @@ logs use:
 </dd>
 </dl>
 </section>
-<section id="enc.commit-get_main_command_parser-managed-git-options">
-<h2>Managed git options<a class="headerlink" href="#enc.commit-get_main_command_parser-managed-git-options" title="Link to this heading">¶</a></h2>
+<section id="enc.merge-get_main_command_parser-managed-git-options">
+<h2>Managed git options<a class="headerlink" href="#enc.merge-get_main_command_parser-managed-git-options" title="Link to this heading">¶</a></h2>
 <p>These options and values will be passed to underlying git commands after certain manipulations.</p>
 <dl class="option-list">
 <dt><kbd>-m, --message</kbd></dt>
@@ -78,20 +77,14 @@ logs use:
 <dt><kbd>-F, --file</kbd></dt>
 <dd><p>Take the commit message from the given file. Use - to read the message from the standard input.</p>
 </dd>
-<dt><kbd>-C, --reuse-message</kbd></dt>
-<dd><p>Take an existing commit object, and reuse the log message and the authorship information (including the timestamp) when creating the commit.</p>
-</dd>
-<dt><kbd>--trailer</kbd></dt>
-<dd><p>Specify a (&lt;token&gt;, &lt;value&gt;) pair that should be applied as a trailer. (e.g. git commit –trailer “Signed-off-by:C O Mitter &lt;committer&#64;example.com&gt;” –trailer “Helped-by:C O Mitter &lt;committer&#64;example.com&gt;” will add the “Signed-off-by” trailer and the “Helped-by” trailer to the commit message.)</p>
-</dd>
 </dl>
 </section>
-<section id="enc.commit-get_main_command_parser-signoff-group">
-<h2>Signoff group<a class="headerlink" href="#enc.commit-get_main_command_parser-signoff-group" title="Link to this heading">¶</a></h2>
-<p>Enable -s to signoff a commit and use the –no-signoff to countermand a previously set –signoff</p>
+<section id="enc.merge-get_main_command_parser-signoff-group">
+<h2>Signoff group<a class="headerlink" href="#enc.merge-get_main_command_parser-signoff-group" title="Link to this heading">¶</a></h2>
+<p>Enable -signoff to signoff a commit and use the –no-signoff to countermand a previously set –signoff</p>
 <dl class="option-list">
-<dt><kbd>-s, --signoff</kbd></dt>
-<dd><p>Add a <code class="docutils literal notranslate"><span class="pre">Signed-off-by</span></code> trailer by the committer at the end of the commit log message. The meaning of a signoff depends on the project to which you’re committing. For example, it may certify that the committer has the rights to submit the work under the project’s license or agrees to some contributor representation, such as a Developer Certificate of Origin.</p>
+<dt><kbd>--signoff</kbd></dt>
+<dd><p>Add a <code class="docutils literal notranslate"><span class="pre">Signed-off-by</span></code> trailer by the committer at the end of the merge commit log message. The meaning of a signoff depends on the project to which you’re committing. For example, it may certify that the committer has the rights to submit the work under the project’s license or agrees to some contributor representation, such as a Developer Certificate of Origin.</p>
 <p>Default: <code class="docutils literal notranslate"><span class="pre">False</span></code></p>
 </dd>
 <dt><kbd>--no-signoff</kbd></dt>
@@ -136,14 +129,14 @@ logs use:
 <li class="toctree-l1"><a class="reference internal" href="enc-add-cli.html">add</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enc-rm-cli.html">rm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enc-status-cli.html">status</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">commit</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#enc.commit-get_main_command_parser-named-arguments">Named Arguments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#enc.commit-get_main_command_parser-managed-git-options">Managed git options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#enc.commit-get_main_command_parser-signoff-group">Signoff group</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enc-commit-cli.html">commit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enc-fetch-cli.html">fetch</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">merge</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#enc.merge-get_main_command_parser-named-arguments">Named Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enc.merge-get_main_command_parser-managed-git-options">Managed git options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enc.merge-get_main_command_parser-signoff-group">Signoff group</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="enc-fetch-cli.html">fetch</a></li>
-<li class="toctree-l1"><a class="reference internal" href="enc-merge-cli.html">merge</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enc-pull-cli.html">pull</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enc-push-cli.html">push</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enc-manip-cli.html">manip</a></li>
@@ -167,8 +160,8 @@ logs use:
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="enc-status-cli.html" title="previous chapter">status</a></li>
-      <li>Next: <a href="enc-fetch-cli.html" title="next chapter">fetch</a></li>
+      <li>Previous: <a href="enc-fetch-cli.html" title="previous chapter">fetch</a></li>
+      <li>Next: <a href="enc-pull-cli.html" title="next chapter">pull</a></li>
   </ul></li>
 </ul>
 </div>
@@ -192,7 +185,7 @@ logs use:
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |
-      <a href="../_sources/enc/enc-commit-cli.rst.txt"
+      <a href="../_sources/enc/enc-merge-cli.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 

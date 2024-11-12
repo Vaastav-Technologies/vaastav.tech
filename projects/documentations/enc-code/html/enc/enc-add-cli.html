@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>manip &#8212; enc-code 0.0.0 documentation</title>
+    <title>add &#8212; enc-code 0.0.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d1102ebc" />
     <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=c058f7c8" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
@@ -14,8 +14,8 @@
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="generate-config" href="enc-generate-config-cli.html" />
-    <link rel="prev" title="push" href="enc-push-cli.html" />
+    <link rel="next" title="rm" href="enc-rm-cli.html" />
+    <link rel="prev" title="init" href="enc-init-cli.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -33,31 +33,30 @@
 
           <div class="body" role="main">
             
-  <section id="manip">
-<h1>manip<a class="headerlink" href="#manip" title="Link to this heading">¶</a></h1>
-<p><p>Commands to manipulate files.
-These commands can (scramble and/or encrypt) and/or (descramble and/or decrypt) files or strings by strategies:</p>
+  <section id="add">
+<h1>add<a class="headerlink" href="#add" title="Link to this heading">¶</a></h1>
+<p><p>Command equivalent to <cite>git add</cite> hence many git add options are also valid options for this command.</p>
+<p>Add files in working tree and process-stage. Following actions are performed:</p>
 <ol class="arabic simple">
-<li><p>whole</p></li>
-<li><p>per-line</p></li>
-<li><p>per-word</p></li>
-<li><p>per-delimiter</p></li>
+<li><p>Refresh working-tree.</p></li>
+<li><p>Take snapshot.</p></li>
+<li><p>Process names of supplied files (except for .) and send for add to process-stage.</p></li>
 </ol>
+<p>Restricted options: {‘-i’, ‘–patch’, ‘–all’, ‘-a’, ‘–intent-to-add’, ‘-A’, ‘–no-all’, ‘-N’, ‘–’, ‘–edit’, ‘–fixup’, ‘–pathspec-from-file’, ‘-e’, ‘–pathspec-file-nul’, ‘–no-warn-embedded-repo’, ‘–interactive’, ‘–ignore-removal’, ‘-p’, ‘–no-ignore-removal’}.</p>
 </p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">enc</span> <span class="n">manip</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">v</span> <span class="o">|</span> <span class="o">-</span><span class="n">q</span><span class="p">]</span> <span class="p">{</span><span class="n">randomize</span><span class="p">,</span><span class="n">offset</span><span class="p">,</span><span class="n">identity</span><span class="p">,</span><span class="n">strenc</span><span class="p">}</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">enc</span> <span class="n">add</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">v</span> <span class="o">|</span> <span class="o">-</span><span class="n">q</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">n</span><span class="p">]</span> <span class="n">files_or_globs</span> <span class="p">[</span><span class="n">files_or_globs</span> <span class="o">...</span><span class="p">]</span>
 </pre></div>
 </div>
-<section id="enc.manip-get_main_command_parser-positional-arguments">
-<h2>Positional Arguments<a class="headerlink" href="#enc.manip-get_main_command_parser-positional-arguments" title="Link to this heading">¶</a></h2>
+<section id="enc.add-get_main_command_parser-positional-arguments">
+<h2>Positional Arguments<a class="headerlink" href="#enc.add-get_main_command_parser-positional-arguments" title="Link to this heading">¶</a></h2>
 <dl class="option-list">
-<dt><kbd>manipulator_subcommand</kbd></dt>
-<dd><p>Possible choices: randomize, offset, identity, strenc</p>
-<p>The file manipulator subcommand.</p>
+<dt><kbd>files_or_globs</kbd></dt>
+<dd><p>File/Files to add. This is a required argument and single or multiple files can be provided as value for this argument. Behaves similar to git add &lt;pathspec&gt; and the  &lt;pathspec&gt; will be passed down to git add command. ‘.’ is not yet supported.</p>
 </dd>
 </dl>
 </section>
-<section id="enc.manip-get_main_command_parser-named-arguments">
-<h2>Named Arguments<a class="headerlink" href="#enc.manip-get_main_command_parser-named-arguments" title="Link to this heading">¶</a></h2>
+<section id="enc.add-get_main_command_parser-named-arguments">
+<h2>Named Arguments<a class="headerlink" href="#enc.add-get_main_command_parser-named-arguments" title="Link to this heading">¶</a></h2>
 <dl class="option-list">
 <dt><kbd>-v, --verbose</kbd></dt>
 <dd><dl class="simple">
@@ -79,8 +78,14 @@ logs use:
 </dd>
 </dl>
 </dd>
+<dt><kbd>-n, --dry-run</kbd></dt>
+<dd><p>Only process the files and do not add to the index.</p>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">False</span></code></p>
+</dd>
 </dl>
 </section>
+<p><p>Must be run from from the working-tree repo root.</p>
+</p>
 </section>
 
 
@@ -112,7 +117,11 @@ logs use:
 <p class="caption" role="heading"><span class="caption-text">Subcommands:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="enc-init-cli.html">init</a></li>
-<li class="toctree-l1"><a class="reference internal" href="enc-add-cli.html">add</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">add</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#enc.add-get_main_command_parser-positional-arguments">Positional Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enc.add-get_main_command_parser-named-arguments">Named Arguments</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="enc-rm-cli.html">rm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enc-status-cli.html">status</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enc-commit-cli.html">commit</a></li>
@@ -120,11 +129,7 @@ logs use:
 <li class="toctree-l1"><a class="reference internal" href="enc-merge-cli.html">merge</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enc-pull-cli.html">pull</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enc-push-cli.html">push</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">manip</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#enc.manip-get_main_command_parser-positional-arguments">Positional Arguments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#enc.manip-get_main_command_parser-named-arguments">Named Arguments</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="enc-manip-cli.html">manip</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Plumbing subcommands:</span></p>
 <ul>
@@ -145,8 +150,8 @@ logs use:
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="enc-push-cli.html" title="previous chapter">push</a></li>
-      <li>Next: <a href="enc-generate-config-cli.html" title="next chapter">generate-config</a></li>
+      <li>Previous: <a href="enc-init-cli.html" title="previous chapter">init</a></li>
+      <li>Next: <a href="enc-rm-cli.html" title="next chapter">rm</a></li>
   </ul></li>
 </ul>
 </div>
@@ -170,7 +175,7 @@ logs use:
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |
-      <a href="../_sources/enc/enc-manip-cli.rst.txt"
+      <a href="../_sources/enc/enc-add-cli.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 

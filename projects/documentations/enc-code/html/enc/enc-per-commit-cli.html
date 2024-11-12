@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>manip &#8212; enc-code 0.0.0 documentation</title>
+    <title>per-commit &#8212; enc-code 0.0.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d1102ebc" />
     <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=c058f7c8" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
@@ -14,8 +14,8 @@
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="generate-config" href="enc-generate-config-cli.html" />
-    <link rel="prev" title="push" href="enc-push-cli.html" />
+    <link rel="next" title="refresh" href="enc-refresh-cli.html" />
+    <link rel="prev" title="generate-config" href="enc-generate-config-cli.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -33,31 +33,23 @@
 
           <div class="body" role="main">
             
-  <section id="manip">
-<h1>manip<a class="headerlink" href="#manip" title="Link to this heading">¶</a></h1>
-<p><p>Commands to manipulate files.
-These commands can (scramble and/or encrypt) and/or (descramble and/or decrypt) files or strings by strategies:</p>
-<ol class="arabic simple">
-<li><p>whole</p></li>
-<li><p>per-line</p></li>
-<li><p>per-word</p></li>
-<li><p>per-delimiter</p></li>
-</ol>
+  <section id="per-commit">
+<h1>per-commit<a class="headerlink" href="#per-commit" title="Link to this heading">¶</a></h1>
+<p><p>This command runs the supplied action once per commit.</p>
 </p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">enc</span> <span class="n">manip</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">v</span> <span class="o">|</span> <span class="o">-</span><span class="n">q</span><span class="p">]</span> <span class="p">{</span><span class="n">randomize</span><span class="p">,</span><span class="n">offset</span><span class="p">,</span><span class="n">identity</span><span class="p">,</span><span class="n">strenc</span><span class="p">}</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">enc</span> <span class="n">per</span><span class="o">-</span><span class="n">commit</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">v</span> <span class="o">|</span> <span class="o">-</span><span class="n">q</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">c</span> <span class="n">COMMAND</span><span class="p">]</span> <span class="n">rev</span><span class="o">-</span><span class="nb">list</span> <span class="p">[</span><span class="n">rev</span><span class="o">-</span><span class="nb">list</span> <span class="o">...</span><span class="p">]</span>
 </pre></div>
 </div>
-<section id="enc.manip-get_main_command_parser-positional-arguments">
-<h2>Positional Arguments<a class="headerlink" href="#enc.manip-get_main_command_parser-positional-arguments" title="Link to this heading">¶</a></h2>
+<section id="enc.per_commit-get_main_command_parser-positional-arguments">
+<h2>Positional Arguments<a class="headerlink" href="#enc.per_commit-get_main_command_parser-positional-arguments" title="Link to this heading">¶</a></h2>
 <dl class="option-list">
-<dt><kbd>manipulator_subcommand</kbd></dt>
-<dd><p>Possible choices: randomize, offset, identity, strenc</p>
-<p>The file manipulator subcommand.</p>
+<dt><kbd>rev-list</kbd></dt>
+<dd><p>Uses <cite>git rev-list</cite> underneath and hence all the git rev-list options are valid for this command</p>
 </dd>
 </dl>
 </section>
-<section id="enc.manip-get_main_command_parser-named-arguments">
-<h2>Named Arguments<a class="headerlink" href="#enc.manip-get_main_command_parser-named-arguments" title="Link to this heading">¶</a></h2>
+<section id="enc.per_commit-get_main_command_parser-named-arguments">
+<h2>Named Arguments<a class="headerlink" href="#enc.per_commit-get_main_command_parser-named-arguments" title="Link to this heading">¶</a></h2>
 <dl class="option-list">
 <dt><kbd>-v, --verbose</kbd></dt>
 <dd><dl class="simple">
@@ -78,6 +70,9 @@ logs use:
 -qqq to Disable full logging.</p>
 </dd>
 </dl>
+</dd>
+<dt><kbd>-c, --command</kbd></dt>
+<dd><p>Command to run per commit. This command goes as a value to <cite>git show –pretty=&lt;cmd&gt;</cite>.</p>
 </dd>
 </dl>
 </section>
@@ -110,7 +105,7 @@ logs use:
 </search>
 <script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
 <p class="caption" role="heading"><span class="caption-text">Subcommands:</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="enc-init-cli.html">init</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enc-add-cli.html">add</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enc-rm-cli.html">rm</a></li>
@@ -120,16 +115,16 @@ logs use:
 <li class="toctree-l1"><a class="reference internal" href="enc-merge-cli.html">merge</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enc-pull-cli.html">pull</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enc-push-cli.html">push</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">manip</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#enc.manip-get_main_command_parser-positional-arguments">Positional Arguments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#enc.manip-get_main_command_parser-named-arguments">Named Arguments</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="enc-manip-cli.html">manip</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Plumbing subcommands:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="enc-generate-config-cli.html">generate-config</a></li>
-<li class="toctree-l1"><a class="reference internal" href="enc-per-commit-cli.html">per-commit</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">per-commit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#enc.per_commit-get_main_command_parser-positional-arguments">Positional Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enc.per_commit-get_main_command_parser-named-arguments">Named Arguments</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="enc-refresh-cli.html">refresh</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enc-process-cli.html">process</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enc-unprocess-cli.html">unprocess</a></li>
@@ -145,8 +140,8 @@ logs use:
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="enc-push-cli.html" title="previous chapter">push</a></li>
-      <li>Next: <a href="enc-generate-config-cli.html" title="next chapter">generate-config</a></li>
+      <li>Previous: <a href="enc-generate-config-cli.html" title="previous chapter">generate-config</a></li>
+      <li>Next: <a href="enc-refresh-cli.html" title="next chapter">refresh</a></li>
   </ul></li>
 </ul>
 </div>
@@ -170,7 +165,7 @@ logs use:
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |
-      <a href="../_sources/enc/enc-manip-cli.rst.txt"
+      <a href="../_sources/enc/enc-per-commit-cli.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 

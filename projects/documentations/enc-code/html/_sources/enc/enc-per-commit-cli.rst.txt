@@ -1,0 +1,8 @@
+##########
+per-commit
+##########
+
+.. argparse::
+    :module: enc.per_commit
+    :func: get_main_command_parser
+    :prog: enc per-commit

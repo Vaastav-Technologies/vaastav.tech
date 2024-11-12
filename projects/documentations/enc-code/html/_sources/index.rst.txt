@@ -21,13 +21,26 @@ Base command ``enc``
    :caption: Subcommands:
 
    enc/enc-init-cli
-   enc/enc-manip-cli
-   enc/enc-generate-config-cli
-   enc/enc-refresh-cli
-   enc/enc-process-cli
+   enc/enc-add-cli
+   enc/enc-rm-cli
+   enc/enc-status-cli
    enc/enc-commit-cli
+   enc/enc-fetch-cli
+   enc/enc-merge-cli
    enc/enc-pull-cli
    enc/enc-push-cli
+   enc/enc-manip-cli
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Plumbing subcommands:
+
+   enc/enc-generate-config-cli
+   enc/enc-per-commit-cli
+   enc/enc-refresh-cli
+   enc/enc-process-cli
+   enc/enc-unprocess-cli
    enc/enc-snapshot-cli
    enc/enc-rev-snapshot-cli
 
