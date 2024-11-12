@@ -14,7 +14,7 @@
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="fetch" href="enc-fetch-cli.html" />
+    <link rel="next" title="log" href="enc-log-cli.html" />
     <link rel="prev" title="status" href="enc-status-cli.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -37,8 +37,8 @@
 <h1>commit<a class="headerlink" href="#commit" title="Link to this heading">¶</a></h1>
 <p><p>Command equivalent to <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>.</p>
 <p>Commit files in the process-stage with encrypted commit message.</p>
-<p>Restricted options: {’–allow-empty’, ‘-i’, ‘–patch’, ‘–only’, ‘-o’, ‘–’, ‘–edit’, ‘–fixup’, ‘–pathspec-from-file’, ‘-e’, ‘–pathspec-file-nul’, ‘–template’, ‘–squash’, ‘–include’, ‘–status’, ‘-c’, ‘–cleanup’, ‘–interactive’, ‘-t’, ‘–allow-empty-message’, ‘–no-status’, ‘-p’, ‘–reedit-message’}.</p>
-<p>{’–null’, ‘–long’, ‘–short’, ‘–dry-run’, ‘–porcelain’, ‘-z’} imply dry-run mode.</p>
+<p>Restricted options: {’–pathspec-from-file’, ‘-c’, ‘–’, ‘-i’, ‘-t’, ‘–squash’, ‘–no-status’, ‘–fixup’, ‘–allow-empty-message’, ‘–edit’, ‘–only’, ‘–pathspec-file-nul’, ‘–include’, ‘–patch’, ‘–allow-empty’, ‘–status’, ‘-p’, ‘–template’, ‘–interactive’, ‘-e’, ‘–cleanup’, ‘–reedit-message’, ‘-o’}.</p>
+<p>{’–short’, ‘-z’, ‘–porcelain’, ‘–null’, ‘–long’, ‘–dry-run’} imply dry-run mode.</p>
 </p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">enc</span> <span class="n">commit</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">v</span> <span class="o">|</span> <span class="o">-</span><span class="n">q</span><span class="p">]</span> <span class="p">(</span><span class="o">-</span><span class="n">m</span> <span class="n">MESSAGE</span> <span class="o">|</span> <span class="o">-</span><span class="n">F</span> <span class="n">FILE</span> <span class="o">|</span> <span class="o">-</span><span class="n">C</span> <span class="n">REUSE_MESSAGE</span><span class="p">)</span> <span class="p">[</span><span class="o">--</span><span class="n">trailer</span> <span class="n">TRAILER</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">s</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">signoff</span><span class="p">]</span>
 </pre></div>
@@ -142,6 +142,7 @@ logs use:
 <li class="toctree-l2"><a class="reference internal" href="#enc.commit-get_main_command_parser-signoff-group">Signoff group</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="enc-log-cli.html">log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enc-fetch-cli.html">fetch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enc-merge-cli.html">merge</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enc-pull-cli.html">pull</a></li>
@@ -168,7 +169,7 @@ logs use:
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
       <li>Previous: <a href="enc-status-cli.html" title="previous chapter">status</a></li>
-      <li>Next: <a href="enc-fetch-cli.html" title="next chapter">fetch</a></li>
+      <li>Next: <a href="enc-log-cli.html" title="next chapter">log</a></li>
   </ul></li>
 </ul>
 </div>

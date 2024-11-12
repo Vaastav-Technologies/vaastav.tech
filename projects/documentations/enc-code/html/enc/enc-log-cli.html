@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>push &#8212; enc-code 0.0.0 documentation</title>
+    <title>log &#8212; enc-code 0.0.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d1102ebc" />
     <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=c058f7c8" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
@@ -14,8 +14,8 @@
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="manip" href="enc-manip-cli.html" />
-    <link rel="prev" title="pull" href="enc-pull-cli.html" />
+    <link rel="next" title="fetch" href="enc-fetch-cli.html" />
+    <link rel="prev" title="commit" href="enc-commit-cli.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -33,23 +33,15 @@
 
           <div class="body" role="main">
             
-  <section id="push">
-<h1>push<a class="headerlink" href="#push" title="Link to this heading">¶</a></h1>
-<p><p>Command equivalent to <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code>.</p>
-<dl class="simple">
-<dt>Push files in working tree and process-stage. Following actions are performed:</dt><dd><ol class="arabic simple">
-<li><p>Get process-stage information.</p></li>
-<li><p>Push from the process-stage.</p></li>
-</ol>
-</dd>
-</dl>
-<p>[‘-n’, ‘–dry-run’] imply dry-run mode.</p>
+  <section id="log">
+<h1>log<a class="headerlink" href="#log" title="Link to this heading">¶</a></h1>
+<p><p>Command equivalent to <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>.</p>
 </p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">enc</span> <span class="n">push</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">v</span> <span class="o">|</span> <span class="o">-</span><span class="n">q</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">enc</span> <span class="n">log</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">v</span> <span class="o">|</span> <span class="o">-</span><span class="n">q</span><span class="p">]</span>
 </pre></div>
 </div>
-<section id="enc.push-get_main_command_parser-named-arguments">
-<h2>Named Arguments<a class="headerlink" href="#enc.push-get_main_command_parser-named-arguments" title="Link to this heading">¶</a></h2>
+<section id="enc.log-get_main_command_parser-named-arguments">
+<h2>Named Arguments<a class="headerlink" href="#enc.log-get_main_command_parser-named-arguments" title="Link to this heading">¶</a></h2>
 <dl class="option-list">
 <dt><kbd>-v, --verbose</kbd></dt>
 <dd><dl class="simple">
@@ -110,14 +102,14 @@ logs use:
 <li class="toctree-l1"><a class="reference internal" href="enc-rm-cli.html">rm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enc-status-cli.html">status</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enc-commit-cli.html">commit</a></li>
-<li class="toctree-l1"><a class="reference internal" href="enc-log-cli.html">log</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">log</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#enc.log-get_main_command_parser-named-arguments">Named Arguments</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="enc-fetch-cli.html">fetch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enc-merge-cli.html">merge</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enc-pull-cli.html">pull</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">push</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#enc.push-get_main_command_parser-named-arguments">Named Arguments</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="enc-push-cli.html">push</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enc-manip-cli.html">manip</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Plumbing subcommands:</span></p>
@@ -139,8 +131,8 @@ logs use:
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="enc-pull-cli.html" title="previous chapter">pull</a></li>
-      <li>Next: <a href="enc-manip-cli.html" title="next chapter">manip</a></li>
+      <li>Previous: <a href="enc-commit-cli.html" title="previous chapter">commit</a></li>
+      <li>Next: <a href="enc-fetch-cli.html" title="next chapter">fetch</a></li>
   </ul></li>
 </ul>
 </div>
@@ -164,7 +156,7 @@ logs use:
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |
-      <a href="../_sources/enc/enc-push-cli.rst.txt"
+      <a href="../_sources/enc/enc-log-cli.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 

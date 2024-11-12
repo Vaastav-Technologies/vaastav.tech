@@ -25,6 +25,7 @@ Base command ``enc``
    enc/enc-rm-cli
    enc/enc-status-cli
    enc/enc-commit-cli
+   enc/enc-log-cli
    enc/enc-fetch-cli
    enc/enc-merge-cli
    enc/enc-pull-cli
