@@ -1,0 +1,8 @@
+######
+branch
+######
+
+.. argparse::
+    :module: enc.branch
+    :func: get_main_command_parser
+    :prog: enc branch

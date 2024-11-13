@@ -30,6 +30,8 @@ Base command ``enc``
    enc/enc-merge-cli
    enc/enc-pull-cli
    enc/enc-push-cli
+   enc/enc-branch-cli
+   enc/enc-switch-cli
    enc/enc-manip-cli
 
 
