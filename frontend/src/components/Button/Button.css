@@ -1,0 +1,35 @@
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.button-primary {
+    background-color: var(--bg-primary);
+    color: white;
+    
+    
+    :hover {
+        background-color: var(--bg-primary-hover);
+    }
+}
+
+
+.button-secondary {
+    background-color: transparent;
+    color: black;
+}
+
+.button-medium {
+    padding: 8px 16px;
+    font-size: 14px;
+}
+
+.button-large {
+    padding: 12px 24px;
+    font-size: 16px;
+}
