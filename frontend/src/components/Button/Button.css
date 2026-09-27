@@ -6,9 +6,10 @@
     border: 1px solid transparent;
     cursor: pointer;
     text-decoration: none;
+    font-weight: 500;
 }
 
-.button-primary {
+.button--primary {
     background-color: var(--bg-primary);
     color: white;
     
@@ -19,17 +20,22 @@
 }
 
 
-.button-secondary {
+.button--secondary {
     background-color: transparent;
     color: black;
 }
 
-.button-medium {
-    padding: 8px 16px;
+.button--small {
+    padding: 5px 12px;
+    font-size: 12px;
+}
+
+.button--medium {
+    padding: 5px 14px;
     font-size: 14px;
 }
 
-.button-large {
+.button--large {
     padding: 12px 24px;
     font-size: 16px;
 }
