@@ -29,7 +29,7 @@ export function Header() {
             <div className="header-right">
                 <Button to="/login" variant="secondary">Login</Button>
                 <Button to="/signup" variant="primary">Sign up</Button>
-                <Button variant="primary" size="small" onClick={() => setIsMenuOpen(!isMenuOpen)} >{isMenuOpen ? <HiOutlineX size={24} /> : <HiOutlineMenu size={24} />}</Button>
+                <button className="menu-btn" aria-label="Menu" onClick={() => setIsMenuOpen(!isMenuOpen)} >{isMenuOpen ? <HiOutlineX size={24} /> : <HiOutlineMenu size={24} />}</button>
             </div>
         </div>
     )

@@ -5,19 +5,19 @@
     flex-direction: row;
     justify-content: space-between;
     position: relative;
-    
+
     .header-left .header-logo-link {
         display: flex;
         flex-direction: row;
         gap: 5px;
         align-items: center;
         justify-content: center;
-        
+
         text-decoration: none;
         font-weight: 500;
         font-size: 20px;
     }
-    
+
     .nav {
         display: none;
     }
@@ -31,21 +31,23 @@
         right: 0;
         z-index: 100;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
         ul {
             width: 100%;
             list-style: none;
             display: flex;
             flex-direction: column;
             padding: 5px 10px;
+
             li {
                 width: 90%;
                 padding: 8px 2px;
                 border-radius: 6px;
-                
+
                 &:hover {
                     background-color: var(--gray-300);
                 }
-                
+
                 .header-nav-link {
                     text-decoration: none;
                     font-weight: 500;
@@ -56,30 +58,72 @@
             }
         }
     }
-    
+
     .header-right {
         display: flex;
         flex-direction: row;
-        gap: 5px;
+        gap: 10px;
         justify-content: space-between;
     }
 }
 
-
+.menu-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    background-color: black;
+    padding: 5px 13px;
+}
 
 .logo-img {
     width: 50px;
     height: 50px;
 }
 
-/*.nav {*/
-/*    display: none;*/
-/*    ul {*/
-/*        !*list-style: none;*!*/
-/*        !*display: flex;*!*/
-/*        !*flex-direction: row;*!*/
-/*        !*justify-content: space-between;*!*/
-/*        !*gap: 5px;*!*/
+@media (min-width: 768px) {
+    .header-right .menu-btn {
+        display: none !important;
+    }
 
-/*    }*/
-/*}*/
+    #header {
+        padding: 12px 20px;
+        .nav,
+        .nav.nav--open {
+            display: flex;
+            justify-content: center;
+            ul {
+                list-style: none;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                gap: 20px;
+                
+                
+                li {
+                    .header-nav-link {
+                        text-decoration: none;
+                        font-weight: 500;
+                        color: black;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+@media (min-width: 1024px) {
+    #header {
+        .nav,
+        .nav.nav--open {
+
+            ul {
+                gap: 34px;
+            }
+        }
+
+    }
+}
