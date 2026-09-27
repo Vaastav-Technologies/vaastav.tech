@@ -1,0 +1,30 @@
+#hero {
+    padding: 20px;
+    background: radial-gradient(circle at 50% 20%, rgba(99, 102, 241, 0.25) 0%, transparent 70%), rosybrown;
+    text-align: center;
+    
+    
+}
+
+.hero-content {
+    p {
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 2;
+    }
+}
+
+.hero-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 40px;
+    
+    gap: 20px;
+    
+    .button {
+        padding: 12px 15px;
+    }
+    
+    
+}

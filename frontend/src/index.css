@@ -14,6 +14,7 @@
   --gray-300: #d1d5db;
   --gray-100: #f3f4f6;
   --white: #ffffff;
+  --rosy-brown: "rosybrown";
   
   --bg-primary: var(--navy-900);
   --bg-primary-hover: var(--navy-800);
@@ -24,6 +25,7 @@
   --text-primary: var(--white);
   --text-secondary: var(--gray-300);
   --text-muted: var(--gray-500);
+  --text-rosy: var(--rosy-brown);
 
   --accent: var(--blue-500);
   --accent-hover: var(--blue-400);
