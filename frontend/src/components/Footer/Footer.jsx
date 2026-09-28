@@ -1,7 +1,7 @@
 import "./Footer.css"
 import LogoImage from "../../assets/favicon-96x96.png";
 import {Link} from "react-router";
-import {FaFacebook, FaLinkedin, FaGithub} from 'react-icons/fa6';
+import {FaFacebook, FaLinkedin, FaGithub, FaInstagram} from 'react-icons/fa6';
 
 export function Footer() {
 
@@ -23,11 +23,14 @@ export function Footer() {
                     </ul>
                 </div>
                 <div className="footer-right">
-                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <a href="https://github.com/Vaastav-Technologies" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                         <FaGithub size={24}/>
                     </a>
-                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <a href="https://www.linkedin.com/company/vaastav-tech/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                         <FaLinkedin size={24}/>
+                    </a>
+                    <a href="https://www.instagram.com/tech.vaastav/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                        <FaInstagram size={24}/>
                     </a>
                     <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                         <FaFacebook size={24}/>
