@@ -24,7 +24,7 @@
     }
 
     .nav.nav--open {
-        background-color: var(--gray-100);
+        background-color: mistyrose;
         display: flex;
         position: absolute;
         top: 100%;
@@ -46,7 +46,7 @@
                 border-radius: 6px;
 
                 &:hover {
-                    background-color: var(--gray-300);
+                    background-color: rosybrown;
                 }
 
                 .header-nav-link {
