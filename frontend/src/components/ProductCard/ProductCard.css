@@ -1,0 +1,26 @@
+
+.search-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /*position: absolute;*/
+    /*background-color: green;*/
+}
+
+.search-input {
+    flex: 1;
+    padding: 12px 14px 12px 48px;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 18px;
+    font-size: 14px;
+    box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.08);
+    outline: none;
+    color: black;
+}
+
+.search-icon {
+    color: #9ca3af;
+    z-index: 1;
+    margin-right: -36px;
+}

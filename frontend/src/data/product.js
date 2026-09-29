@@ -1,12 +1,12 @@
 
-const products = [
+export const products = [
     {
         id: 1,
         name: "Swiftly CLI",
         description: "A fast command-line tool for scaffolding and managing full-stack projects in seconds.",
         category: "CLI Tools",
         language: "Rust",
-        isPublic: true,
+        isPublic: false,
         stars: 1240,
         githubUrl: "https://github.com/example/swiftly-cli",
     },
@@ -16,7 +16,7 @@ const products = [
         description: "An open-source library for building and querying vector embeddings for AI search.",
         category: "AI",
         language: "Python",
-        isPublic: true,
+        isPublic: false,
         stars: 3890,
         githubUrl: "https://github.com/example/vectorlens",
     },
@@ -36,7 +36,7 @@ const products = [
         description: "A lightweight, accessible React component library shared across our products.",
         category: "Libraries",
         language: "TypeScript",
-        isPublic: true,
+        isPublic: false,
         stars: 2100,
         githubUrl: "https://github.com/example/uikit-core",
     },
@@ -56,7 +56,7 @@ const products = [
         description: "A documentation generator that turns your codebase comments into a searchable site.",
         category: "Web",
         language: "JavaScript",
-        isPublic: true,
+        isPublic: false,
         stars: 856,
         githubUrl: "https://github.com/example/echodocs",
     },
