@@ -10,13 +10,14 @@ export function ProductCard({product}) {
                 {language.slice(0,1).toUpperCase()}
             </div>
             <div className="product-card-right">
-                <p>{category}</p>
+                <p className={"category"}>{category}</p>
                 <h3>{name}</h3>
-                <p>{description}</p>
-                <span>{stars ? stars : "0"} <FaStar size={12} /></span>
-                <p>Github Link: {isPublic ? githubUrl : "Not listed"}</p>
+                <p className={"description"}>{description}</p>
+                <p className={"stars"}>{stars ? stars : "0"} <FaStar size={12} /></p>
+                <p className={"github-url"}>Github Link: {isPublic ? githubUrl : "Not listed"}</p>
+                <Button variant="primary" children="View Product" />
             </div>
-            <Button variant="primary" />
+            
         </div>
     )
 }

@@ -1,26 +1,55 @@
+.product-card {
+    /*background-color: red;*/
+    max-width: 800px;
+    display: grid;
+    grid-template-columns: minmax(0, 200px) 1fr;
+    border-radius: 15px;
+    border: 1px solid lightgray;
+}
 
-.search-bar {
+.product-card-left {
+    font-size: 3rem;
     display: flex;
     flex-direction: row;
     align-items: center;
-    /*position: absolute;*/
-    /*background-color: green;*/
+    justify-content: center;
+    background: linear-gradient(135deg, plum, rosybrown);
+    border-radius: 15px 0 0 15px;
+    
 }
 
-.search-input {
-    flex: 1;
-    padding: 12px 14px 12px 48px;
-    background-color: white;
-    border: 1px solid lightgray;
-    border-radius: 18px;
-    font-size: 14px;
-    box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.08);
-    outline: none;
-    color: black;
-}
-
-.search-icon {
-    color: #9ca3af;
-    z-index: 1;
-    margin-right: -36px;
+.product-card-right {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 20px;
+    
+    
+    .category {
+        width: 100px;
+        text-align: center;
+        padding: 6px;
+        background-color: lightgray;
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: bold;
+        align-self: end;
+    }
+    
+    h3 {
+        margin: 2px 0;
+    }
+    
+    .stars {
+        margin: 5px 0;
+        color: red;
+    }
+    
+    .github-url {
+        margin: 5px 0;
+    }
+    
+    .button {
+        align-self: end;
+        padding: 8px 10px;
+    }
 }
