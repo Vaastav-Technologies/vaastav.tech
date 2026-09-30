@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import './App.css'
 import {Route, Routes} from 'react-router'
 import {Header} from "./components/Header/Header.jsx";
@@ -9,12 +9,16 @@ import {AIPage} from "./pages/AI/AI.jsx";
 import {DownloadPage} from "./pages/Download/Download.jsx";
 import {PricingPage} from "./pages/Pricing/Pricing.jsx";
 import {ProductsPage} from "./pages/Products/Products.jsx";
+import js from "@eslint/js";
 
 function App() {
-
+    const [ themeMode, setThemeMode ] = useState(localStorage.getItem("themeMode") || "light")
+    
+    useEffect(() => {localStorage.setItem("themeMode", themeMode)}, [themeMode])
+    
     return (
         <>
-            <Header/>
+            <Header themeMode={themeMode} onChangeThemeMode={setThemeMode}/>
             <Routes>
                 <Route path='/' element={<HomePage />} />
                 <Route path='/about' element={<AboutPage />} />
