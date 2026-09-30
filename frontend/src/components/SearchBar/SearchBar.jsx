@@ -3,15 +3,15 @@ import {Link} from "react-router"
 // import { FaSearch } from 'react-icons/fa6';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
 
-export function SearchBar({searchInput, setSearchInput}) {
+export function SearchBar({ value, onChange}) {
 
     return (
         <div className="search-bar">
             <FaMagnifyingGlass size={24} className="search-icon" />
             <input className="search-input" type="text"
                    placeholder="Search ..."
-                   value={searchInput}
-                   onChange={(e) => setSearchInput(e.target.value)}
+                   value={value}
+                    onChange={onChange}
             />
         </div>
     )

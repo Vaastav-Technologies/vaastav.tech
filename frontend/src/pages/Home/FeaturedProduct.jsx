@@ -23,7 +23,7 @@ export function FeaturedProducts() {
             <div className="featured-products-container">
                 <h2>Our Featured Products</h2>
                 <div className="search-bar-container">
-                    <SearchBar />
+                    <SearchBar value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
                 </div>
                 <div className="products-grid">
                     {filteredProductList.map(p => <ProductCard key={p.id} product={p}/>)}
