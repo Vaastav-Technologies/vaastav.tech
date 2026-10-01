@@ -1,5 +1,5 @@
 import "./FeatureProducts.css"
-import { Button } from "../../components/Button/Button.jsx"
+import {Link} from 'react-router'
 import { SearchBar} from "../../components/SearchBar/SearchBar.jsx";
 import {ProductCard} from "../../components/ProductCard/ProductCard.jsx";
 import {products} from "../../data/product.js"
@@ -29,7 +29,7 @@ export function FeaturedProducts() {
                     {filteredProductList.map(p => <ProductCard key={p.id} product={p}/>)}
                 </div>
             </div>
-            <Button to={"/products"} variant="primary">View All Products</Button>
+            <Link className="all-products-btn" to={"/products"}>View All Products</Link>
         </section>
     )
 }

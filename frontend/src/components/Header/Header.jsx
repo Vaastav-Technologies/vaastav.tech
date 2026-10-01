@@ -6,7 +6,7 @@ import {useState} from "react";
 import { HiOutlineMenu, HiOutlineX } from 'react-icons/hi';
 import { FaLightbulb, FaRegLightbulb } from 'react-icons/fa6';
 
-export function Header({value, onChangeThemeMode}) {
+export function Header({themeMode, onChangeThemeMode}) {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isThemeMenuOpen, setIsThemeMenuOpen] = useState(false)
     
@@ -36,9 +36,10 @@ export function Header({value, onChangeThemeMode}) {
                         isThemeMenuOpen && (
                             <div className="theme-menu">
                                 <ul>
-                                    <li><button>Automatic</button></li>
-                                    <li><button>Light</button></li>
-                                    <li><button>Dark</button></li>
+                                    <li><button className={themeMode === "automatic" ? "theme-option theme-active" : "theme-option"} onClick={() => onChangeThemeMode("automatic")}>Automatic</button></li>
+                                    <li><button className={themeMode === "light" ? "theme-option theme-active" : "theme-option"} onClick={() => onChangeThemeMode("light")}>Light</button></li>
+                                    <li><button className={themeMode === "dark" ? "theme-option theme-active" : "theme-option"} onClick={() => onChangeThemeMode("dark")}>Dark</button></li>
+                                    
                                 </ul>
                             </div>
                         )

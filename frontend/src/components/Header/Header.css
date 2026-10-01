@@ -1,5 +1,4 @@
 #header {
-    /*background-color: red;*/
     padding: 12px 10px;
     display: flex;
     flex-direction: row;
@@ -16,7 +15,7 @@
         text-decoration: none;
         font-weight: 500;
         font-size: 20px;
-        color: rebeccapurple;
+        color: var(--text-primary);
     }
 
     .nav {
@@ -24,14 +23,14 @@
     }
 
     .nav.nav--open {
-        background-color: mistyrose;
+        background-color: var(--bg-primary);
         display: flex;
         position: absolute;
         top: 100%;
         left: 0;
         right: 0;
         z-index: 100;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 12px var(--shadow-color);
 
         ul {
             width: 100%;
@@ -46,13 +45,13 @@
                 border-radius: 6px;
 
                 &:hover {
-                    background-color: rosybrown;
+                    background-color: var(--accent-hover);
                 }
 
                 .header-nav-link {
                     text-decoration: none;
                     font-weight: 500;
-                    color: black;
+                    color: var(--text-primary);
                     padding: 8px 12px;
                     border-radius: 6px;
                 }
@@ -75,7 +74,7 @@
     border-radius: 6px;
     border: 1px solid transparent;
     cursor: pointer;
-    background-color: black;
+    background-color: var(--btn-primary-bg);
     padding: 5px 13px;
 }
 
@@ -84,13 +83,54 @@
     height: 50px;
 }
 
+/*light dark */
+
+
+.theme-toggle {
+    display: flex;
+    position: relative;
+}
+
+.theme-menu {
+    position: absolute;
+    top: 100%;
+    background-color: var(--bg-primary);
+    border-radius: 5px;
+    padding: 8px 10px;
+    box-shadow: 4px 4px 12px var(--shadow-color);
+    
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        
+        .theme-option {
+            background-color: var(--btn-primary-bg);
+            border-radius: 4px;
+            padding: 4px;
+            color: var(--btn-primary-text);
+            cursor: pointer;
+            margin-top: 4px;
+            
+            &:hover {
+                background-color: var(--btn-primary-hover);
+            }
+        }
+
+        .theme-option.theme-active {
+            background-color: var(--btn-primary-hover);
+        }
+    }
+}
+
 .theme-btn {
     background-color: transparent;
     border: none
+    
 }
 
 .theme-icon {
-    color: black;
+    color: var(--text-primary);
 }
 
 @media (min-width: 768px) {
@@ -116,7 +156,6 @@
                     .header-nav-link {
                         text-decoration: none;
                         font-weight: 500;
-                        color: black;
                     }
                 }
             }

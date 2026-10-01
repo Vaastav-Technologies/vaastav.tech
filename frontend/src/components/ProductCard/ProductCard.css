@@ -4,7 +4,7 @@
     display: grid;
     grid-template-columns: minmax(0, 200px) 1fr;
     border-radius: 15px;
-    border: 1px solid lightgray;
+    border: 1px solid var(--border-light);
 }
 
 .product-card-left {
@@ -13,7 +13,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, plum, rosybrown);
+    background: var(--bg-hero);
     border-radius: 15px 0 0 15px;
     
 }
@@ -28,11 +28,12 @@
         width: 100px;
         text-align: center;
         padding: 6px;
-        background-color: lightgray;
+        background-color: var(--bg-surface-hover);
         border-radius: 8px;
         font-size: 12px;
         font-weight: bold;
         align-self: end;
+        color: var(--text-muted);
     }
     
     h3 {
@@ -41,7 +42,7 @@
     
     .stars {
         margin: 5px 0;
-        color: red;
+        color: var(--text-secondary);
     }
     
     .github-url {

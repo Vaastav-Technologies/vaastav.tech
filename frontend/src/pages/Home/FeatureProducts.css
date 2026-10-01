@@ -28,3 +28,19 @@ h2 {
     align-items: center;
     gap: 20px;
 }
+
+.all-products-btn {
+    display: block;
+    width: 150px;
+    margin: 30px auto;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    color: var(--btn-primary-text);
+    background-color: var(--btn-primary-bg);
+    
+    &:hover {
+        background-color: var(--btn-primary-hover);
+    }
+}

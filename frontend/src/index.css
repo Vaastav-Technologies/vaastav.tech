@@ -70,3 +70,87 @@ p {
   margin: 0
 }
 
+:root,
+[data-theme="light"] {
+  /* Backgrounds */
+  --bg-primary: #fdfaf9;
+  --bg-surface: #ffffff;
+  --bg-surface-hover: #f4ece9;
+  --bg-hero: linear-gradient(135deg, #e8d5e8, #f2e0da);
+  --bg-hero-glow: radial-gradient(circle at 50% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+
+  /* Text */
+  --text-primary: #2b2230;
+  --text-secondary: #5c4f5c;
+  --text-muted: #8a7a8a;
+
+  /* Accent */
+  --accent: #bc8f8f;
+  --accent-hover: #a97878;
+  --accent-secondary: #9c6f9c;
+
+  /* Borders */
+  --border: #e6d9d9;
+  --border-light: #d9c9d9;
+
+  /* Buttons */
+  --btn-primary-bg: var(--accent);
+  --btn-primary-text: #ffffff;
+  --btn-primary-hover: var(--accent-hover);
+
+  --btn-secondary-bg: transparent;
+  --btn-secondary-text: var(--text-primary);
+  --btn-secondary-border: var(--border-light);
+  --btn-secondary-hover: var(--bg-surface-hover);
+
+  /* Shadows */
+  --shadow-color: rgba(0, 0, 0, 0.1);
+
+  --footer-bg: #0f0c14;          /* stays near-black, even in light mode */
+  --footer-text: #d4c9d4;
+  --footer-link: #a678c9;        /* purple, slightly adjusted for contrast against the same dark bg */
+  --footer-link-hover: #bc94d9;
+  --footer-border: #241c2c;
+}
+
+[data-theme="dark"] {
+  /* Backgrounds */
+  --bg-primary: #1a1420;       /* deep plum-black, page background */
+  --bg-surface: #241c2c;       /* cards, header, footer */
+  --bg-surface-hover: #2e2438;
+  --bg-hero: linear-gradient(135deg, #8e6f8e, rosybrown);
+  --bg-hero-glow: radial-gradient(circle at 50% 20%, rgba(99, 102, 241, 0.25) 0%, transparent 70%);
+
+  /* Text */
+  --text-primary: #f5f0f2;
+  --text-secondary: #c9bcc9;
+  --text-muted: #8f7f8f;
+
+  /* Accent (drawn from your palette) */
+  --accent: #bc8f8f;           /* rosybrown itself, as your brand accent */
+  --accent-hover: #cf9f9f;
+  --accent-secondary: #a774a7; /* plum-leaning secondary accent */
+
+  /* Borders */
+  --border: #362a3e;
+  --border-light: #443650;
+
+  /* Buttons */
+  --btn-primary-bg: var(--accent);
+  --btn-primary-text: #1a1420;
+  --btn-primary-hover: var(--accent-hover);
+
+  --btn-secondary-bg: transparent;
+  --btn-secondary-text: var(--text-primary);
+  --btn-secondary-border: var(--border-light);
+  --btn-secondary-hover: var(--bg-surface-hover);
+
+  /* Shadows */
+  --shadow-color: rgba(0, 0, 0, 0.4);
+
+  --footer-bg: #14101a;
+  --footer-text: #c9bcc9;
+  --footer-link: #b088d1;        /* purple */
+  --footer-link-hover: #c9a3e0;
+  --footer-border: #2a2032;
+}

@@ -1,6 +1,6 @@
 #hero {
     padding: 20px;
-    background: radial-gradient(circle at 50% 20%, rgba(99, 102, 241, 0.25) 0%, transparent 70%), rosybrown;
+    background: var(--bg-hero);
     text-align: center;
 }
 
