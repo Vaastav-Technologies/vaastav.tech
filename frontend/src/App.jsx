@@ -14,7 +14,19 @@ import js from "@eslint/js";
 function App() {
     const [ themeMode, setThemeMode ] = useState(localStorage.getItem("themeMode") || "light")
     
-    useEffect(() => {localStorage.setItem("themeMode", themeMode)}, [themeMode])
+    useEffect(() => {
+        localStorage.setItem("themeMode", themeMode)
+        
+        const root = document.documentElement;
+        
+        if(themeMode === "automatic") {
+            const autoMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+            root.setAttribute("data-theme", autoMode ? "dark" : "light")
+        } else {
+            root.setAttribute("data-theme", themeMode)
+        }
+        
+    }, [themeMode])
     
     return (
         <>
