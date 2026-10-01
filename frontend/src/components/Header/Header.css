@@ -118,7 +118,7 @@
         }
 
         .theme-option.theme-active {
-            background-color: var(--btn-primary-hover);
+            background-color: var(--accent-secondary);
         }
     }
 }

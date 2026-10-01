@@ -55,7 +55,7 @@ body {
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: var(--bg-primary);
   font-family: var(--sans);
 }
 
